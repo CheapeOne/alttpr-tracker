@@ -1,3 +1,16 @@
+# ALTTP Randomizer Tracker
+
+⚠️ NOTE:
+
+This tracker was forked from [ItsSupercar/alttpr-Tracker](https://github.com/ItsSupercar/alttpr-Tracker) and adds the following features:
+- Progression saving: The page autosaves all the items chests etc you've toggled. This lets you close the tab or refresh and keep your progress.
+- PWA support: The page can now be installed to the homepage as a progressive web app (PWA). This also allows you to track while offline.
+- Reset button
+
+The following is the original readme.
+
+---
+
 Hi I made a tracker for playing this video game. It's kind of in beta, but it's mostly working, I think! Try it out!
 
 ## INSTALLATION
