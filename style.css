@@ -527,7 +527,7 @@ input {cursor:pointer;}
 	z-index:99998;
 }
 
-#tabIcon {
+.tabIcon {
 	position:absolute;
 	left:5px;
 	top:0px;
