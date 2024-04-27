@@ -1,7 +1,5 @@
 /**
- *
  * Save and load the state of the tracker with local storage.
- *
  */
 
 const TRACKABLES_KEY = 'trackables';
