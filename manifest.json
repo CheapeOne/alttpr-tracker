@@ -1,5 +1,6 @@
 {
   "name": "LTTP Randomizer Tracker",
+  "short_name": "LTTP Tracker",
   "start_url": "https://cheapeone.github.io/alttpr-tracker",
   "display": "standalone",
   "theme_color": "#000",
