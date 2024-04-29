@@ -312,7 +312,7 @@ export const stats = {
   fetch: function () {
     $.ajax({
       type: 'GET',
-      url: 'stats_standard_random.csv',
+      url: '/assets/stats_standard_random.csv',
       dataType: 'text',
       success: function (data) {
         //convert the CSV into a javascript object

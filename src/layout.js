@@ -80,7 +80,7 @@ export const settings = {
     }
 
     //applies the chosen icon images
-    $('.icon').css({ 'background-image': "url('images/grid" + settings.iconSet + ".png')" });
+    $('.icon').css({ 'background-image': "url('assets/grid" + settings.iconSet + ".png')" });
 
     //goes through the layout object and applies the values for each element, according to the settings chosen
     $.each(layout.positions[settings.layout].all, function (k, v) {
@@ -104,28 +104,28 @@ export const settings = {
     //applies the chosen border settings to the tracker divs
 
     if (settings.border == 4) {
-      $('#items').css({ border: '20px solid transparent', 'border-image': 'url(images/borderThinG.png) 20 round' });
-      $('#gear').css({ border: '20px solid transparent', 'border-image': 'url(images/borderThinR.png) 20 round' });
-      $('#dungeons').css({ border: '20px solid transparent', 'border-image': 'url(images/borderThinY.png) 20 round' });
-      $('#timer').css({ border: '20px solid transparent', 'border-image': 'url(images/borderThinB.png) 20 round' });
-      TweenMax.set('.trackerTitle', { opacity: 1, 'background-image': "url('images/title2.png')", x: 0, y: 0 });
+      $('#items').css({ border: '20px solid transparent', 'border-image': 'url(assets/borderThinG.png) 20 round' });
+      $('#gear').css({ border: '20px solid transparent', 'border-image': 'url(assets/borderThinR.png) 20 round' });
+      $('#dungeons').css({ border: '20px solid transparent', 'border-image': 'url(assets/borderThinY.png) 20 round' });
+      $('#timer').css({ border: '20px solid transparent', 'border-image': 'url(assets/borderThinB.png) 20 round' });
+      TweenMax.set('.trackerTitle', { opacity: 1, 'background-image': "url('assets/title2.png')", x: 0, y: 0 });
     } else if (settings.border == 3) {
-      $('.tracker').css({ border: '28px solid transparent', 'border-image': 'url(images/borderText.png) 28 round' });
+      $('.tracker').css({ border: '28px solid transparent', 'border-image': 'url(assets/borderText.png) 28 round' });
       TweenMax.set('.icon, #timerWrap', { x: '-=8', y: '-=8' });
       TweenMax.set('.trackerTitle', { opacity: 0, x: 0, y: 0 });
       if (settings.layout == 4) {
         TweenMax.set('#dungeons .icon,#gear .icon', { x: '+=8', y: '+=8' });
       }
     } else if (settings.border == 2) {
-      $('#items').css({ border: '20px solid transparent', 'border-image': 'url(images/borderG.png) 20 round' });
-      $('#gear').css({ border: '20px solid transparent', 'border-image': 'url(images/borderR.png) 20 round' });
-      $('#dungeons').css({ border: '20px solid transparent', 'border-image': 'url(images/borderY.png) 20 round' });
-      $('#timer').css({ border: '20px solid transparent', 'border-image': 'url(images/borderB.png) 20 round' });
-      TweenMax.set('.trackerTitle', { opacity: 1, 'background-image': "url('images/title2.png')", x: 0, y: 0 });
+      $('#items').css({ border: '20px solid transparent', 'border-image': 'url(assets/borderG.png) 20 round' });
+      $('#gear').css({ border: '20px solid transparent', 'border-image': 'url(assets/borderR.png) 20 round' });
+      $('#dungeons').css({ border: '20px solid transparent', 'border-image': 'url(assets/borderY.png) 20 round' });
+      $('#timer').css({ border: '20px solid transparent', 'border-image': 'url(assets/borderB.png) 20 round' });
+      TweenMax.set('.trackerTitle', { opacity: 1, 'background-image': "url('assets/title2.png')", x: 0, y: 0 });
       TweenMax.set('#timerWrap', { scaleY: 1 });
     } else if (settings.border == 1) {
-      $('.tracker').css({ border: '20px solid transparent', 'border-image': 'url(images/borderSimp.png) 20 round' });
-      TweenMax.set('.trackerTitle', { opacity: 1, 'background-image': "url('images/title1.png')", x: '-12', y: '-4' });
+      $('.tracker').css({ border: '20px solid transparent', 'border-image': 'url(assets/borderSimp.png) 20 round' });
+      TweenMax.set('.trackerTitle', { opacity: 1, 'background-image': "url('assets/title1.png')", x: '-12', y: '-4' });
 
       if (settings.layout == '2') {
         TweenMax.set('#timerWrap', { scaleY: 1.1 });
