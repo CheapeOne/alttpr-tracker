@@ -1,3 +1,5 @@
+import { items, chests, dungeons, keyShops, setTrackables } from './trackables.js';
+
 /**
  * Save and load the state of the tracker with local storage.
  */
@@ -50,7 +52,7 @@ function _loadStyle(style) {
     return;
   }
 
-  div = results[0];
+  const div = results[0];
   div.className = style.class;
   div.style.cssText = style.style;
 }
@@ -65,27 +67,28 @@ function _loadStyles() {
 function _loadTrackables() {
   const trackables = JSON.parse(window.localStorage.getItem(TRACKABLES_KEY));
   if (trackables) {
-    items = trackables.items;
-    chests = trackables.chests;
-    dungeons = trackables.dungeons;
-    keyShops = trackables.keyShops;
+    setTrackables(trackables);
+    // items = trackables.items;
+    // chests = trackables.chests;
+    // dungeons = trackables.dungeons;
+    // keyShops = trackables.keyShops;
   }
 }
 
-function loadState() {
+export function loadState() {
   _loadTrackables();
   _loadStyles();
 }
 
-function resetState() {
+export function resetState() {
   window.localStorage.removeItem(TRACKABLES_KEY);
   window.localStorage.removeItem(STYLES_KEY);
   window.removeEventListener('beforeunload', saveState);
   window.location.reload();
 }
 
-function showResetModal() {
-  const resetPrompt = document.getElementById('resetPrompt');
+export function showResetModal() {
+  const resetPrompt = /** @type {HTMLDialogElement} */ (document.getElementById('resetPrompt'));
   resetPrompt.showModal();
 }
 

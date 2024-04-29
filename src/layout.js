@@ -1,8 +1,11 @@
-function popout() {
+import { logic } from './logic.js';
+import { dungeons, map } from './trackables.js';
+
+export function popout() {
   console.log($('#totalCover').width());
 
-  width = $('#totalCover').width() + 40 + (settings.mapAlign == 1 ? $('#totalCover').height() / 2 : 0);
-  height = $('#totalCover').height() + 40 + (settings.mapAlign == 2 ? $('#totalCover').width() / 2 : 0);
+  const width = $('#totalCover').width() + 40 + (settings.mapAlign == 1 ? $('#totalCover').height() / 2 : 0);
+  const height = $('#totalCover').height() + 40 + (settings.mapAlign == 2 ? $('#totalCover').width() / 2 : 0);
 
   console.log(width + ' ' + height);
 
@@ -13,7 +16,7 @@ function popout() {
   );
 }
 
-settings = {
+export const settings = {
   open: false,
   toggle: function () {
     //function that opens and closes the settings box
@@ -36,7 +39,7 @@ settings = {
   },
   applyCookie: function () {
     //reads the user's cookie and returns it as a settings object
-    savedSettings =
+    const savedSettings =
       typeof settings.getCookie('settings') !== 'undefined' ? JSON.parse(settings.getCookie('settings')) : {};
 
     //applies each setting from the cookie to the radio buttons
@@ -161,7 +164,7 @@ settings = {
   },
 };
 
-layout = {
+export const layout = {
   positions: {
     //a big object that transforms the layout based on the different options the user can select
     0: {
@@ -592,14 +595,14 @@ layout = {
       }
 
       //calculates the scale needed to fit map container into top right
-      TRwid = $(window).width() - $('#totalCover').width();
-      TRhei = $(window).height();
-      TRscale = Math.min(TRwid / $('#mapBox').width(), TRhei / $('#mapBox').height());
+      const TRwid = $(window).width() - $('#totalCover').width();
+      const TRhei = $(window).height();
+      const TRscale = Math.min(TRwid / $('#mapBox').width(), TRhei / $('#mapBox').height());
 
       //calculates the scale needed to fit map container into bottom left
-      BLhei = $(window).height() - $('#totalCover').height() - 38;
-      BLwid = $(window).width();
-      BLscale = Math.min(BLwid / $('#mapBox').width(), BLhei / $('#mapBox').height());
+      const BLhei = $(window).height() - $('#totalCover').height() - 38;
+      const BLwid = $(window).width();
+      const BLscale = Math.min(BLwid / $('#mapBox').width(), BLhei / $('#mapBox').height());
 
       //uses whichever layout allows the maps to be bigger
       if (TRscale >= BLscale) {

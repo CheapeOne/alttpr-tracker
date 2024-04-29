@@ -1,4 +1,8 @@
-statsTable = {};
+import { settings } from './layout.js';
+import { logic } from './logic.js';
+import { items, dungeons, chests } from './trackables.js';
+
+export const statsTable = {};
 
 function merge_array(array1, array2) {
   var result_array = [];
@@ -18,7 +22,7 @@ function merge_array(array1, array2) {
   return result_array;
 }
 
-stats = {
+export const stats = {
   goList0: function () {
     var bow =
         settings.keyMode == 2
@@ -27,7 +31,7 @@ stats = {
       lamp = items.lamp.val,
       bigKey = items.bigKey0.val;
 
-    list = [!bow ? 'bow' : ''];
+    let list = [!bow ? 'bow' : ''];
 
     list = list.filter(Boolean);
     return list;
@@ -69,7 +73,7 @@ stats = {
       key = items.key2.val,
       bigKey = items.bigKey2.val;
 
-    list = [
+    let list = [
       !entry && !items.glove.val ? 'glove' : '',
       !entry && !items.flute.val ? 'flute' : '',
       !entry && !items.mirror.val ? 'mirror' : '',
@@ -105,13 +109,17 @@ stats = {
   },
   goList4: function () {
     var entry = logic.entry4(),
+      bow =
+        settings.keyMode == 2
+          ? (items.bow.val == 2 && items.keyShopFound.val) || items.bow.val == 3
+          : items.bow.val >= 2,
       darkWorldSouth = logic.darkWorldSouth(),
       hammer = items.hammer.val,
       hookshot = items.hookshot.val,
       key = items.key4.val,
       bigKey = items.bigKey4.val;
 
-    list = [
+    let list = [
       !hammer ? 'hammer' : '',
       !bow ? 'bow' : '',
       !items.flippers.val ? 'flippers' : '',
@@ -130,7 +138,7 @@ stats = {
       key = items.key5.val,
       bigKey = items.bigKey5.val;
 
-    list = [
+    let list = [
       !firerod ? 'firerod' : '',
       !sword ? 'sword' : '',
       !items.pearl.val ? 'pearl' : '',
@@ -150,7 +158,7 @@ stats = {
       key = items.key6.val,
       bigKey = items.bigKey6.val;
 
-    list = [
+    let list = [
       !items.pearl.val ? 'pearl' : '',
       !entry && !items.glove.val ? 'glove' : '',
       (!entry || !fightBlind) && !items.hammer.val ? 'hammer' : '',
@@ -173,7 +181,7 @@ stats = {
       key = items.key7.val,
       bigKey = items.bigKey7.val;
 
-    list = [
+    let list = [
       !hammer ? 'hammer' : '',
       !hookshot ? 'hookshot' : '',
       !somaria ? 'somaria' : '',
@@ -203,7 +211,7 @@ stats = {
       fightVit = entry && somaria && (items.sword.val >= 1 || bow),
       medallion = logic.medallion(8);
 
-    list = [
+    let list = [
       !items.pearl.val ? 'pearl' : '',
       !somaria ? 'somaria' : '',
       !entry && !items.flute.val ? 'flute' : '',
@@ -236,13 +244,14 @@ stats = {
       firerod = items.firerod.val,
       icerod = items.icerod.val,
       safety = items.byrna.val || items.shield.val >= 3 || items.cape.val,
+      somaria = items.somaria.val,
       light = logic.DMlight(),
       lamp = items.lamp.val,
       fightTri = entry && firerod && items.icerod.val,
       key = items.key9.val,
       bigKey = items.bigKey9.val;
 
-    list = [
+    let list = [
       !items.pearl.val ? 'pearl' : '',
       !somaria ? 'somaria' : '',
       !firerod ? 'firerod' : '',
@@ -270,7 +279,7 @@ stats = {
   goList10: function () {
     var eastDM = logic.eastDM();
 
-    list = [
+    let list = [
       !items.pearl.val ? 'pearl' : '',
       !items.hammer.val ? 'hammer' : '',
       !items.hookshot.val ? 'hookshot' : '',
@@ -295,7 +304,7 @@ stats = {
   },
   goList11: function () {
     var entry = logic.entry11();
-    list = [!items.sword.val || !entry ? 'sword' : '', !entry && !items.cape.val ? 'cape' : ''];
+    let list = [!items.sword.val || !entry ? 'sword' : '', !entry && !items.cape.val ? 'cape' : ''];
 
     list = list.filter(Boolean);
     return list;
@@ -323,7 +332,7 @@ stats = {
 
         $.each(data, function (row, values) {
           if (row >= 1 && typeof values[1] !== 'undefined') {
-            elem = values[0] + values[1];
+            const elem = values[0] + values[1];
             $.each(values, function (key, count) {
               if (key >= 3) {
                 statsTable[index[key]][elem] = count;
@@ -342,6 +351,7 @@ stats = {
     }
 
     if (settings.predictor !== '0') {
+      let item;
       if (
         elem.id.indexOf('medal') >= 0 ||
         elem.id == 'bomb' ||
@@ -350,7 +360,7 @@ stats = {
       ) {
         item = null;
       } else if (elem.id.indexOf('boss') >= 0 || elem.id.indexOf('prize') >= 0) {
-        id = elem.id.replace(/\D/g, '');
+        const id = elem.id.replace(/\D/g, '');
         item = stats['goList' + id]();
       } else if (elem.id == 'bow') {
         item = items.bow.val == 2 ? 'silver' : 'bow';
@@ -387,9 +397,9 @@ stats = {
         var dungeonColors = {};
 
         $.each(chests, function (id, chest) {
-          status = logic.chests[id]();
+          let status = logic.chests[id]();
           status = status == true ? 1 : status;
-          access = status == 1 || status == 2;
+          let access = status == 1 || status == 2;
           if (chest.opened == false && (access || settings.predictor == 2)) {
             var count = counts['chest' + id] / chests[id].amount;
             chestValues[id] = count;
@@ -406,6 +416,7 @@ stats = {
           var status = logic.dungeons[id]();
           var access = opened < status.min;
           if (typeof numChests !== 'undefined' && unopened !== 0 && (access || settings.predictor == 2)) {
+            let factor; // unused?
             if (settings.predictor == 2) {
               factor = unopened / numChests;
             } else {
@@ -452,6 +463,7 @@ stats = {
     }
   },
   gradient: function (val, type) {
+    let red, gre, blu;
     if (type == 0) {
       red = 791.666666666672 * val * val * val + -1462.5 * val * val + 925.833333333321 * val;
       gre = 595.238095238106 * val * val * val + -514.285714285739 * val * val + 84.0476190476184 * val;

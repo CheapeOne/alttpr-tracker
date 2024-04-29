@@ -1,8 +1,8 @@
-startValue = moment.duration(0);
-digits = { 7: 0, 6: 0, 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
+let startValue = moment.duration(0);
+let digits = { 7: 0, 6: 0, 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
 
 function checkTime() {
-  displayTime = startValue.clone().add(moment().diff(startTime));
+  const displayTime = startValue.clone().add(moment().diff(startTime));
 
   var milliseconds = displayTime.milliseconds();
   var seconds = displayTime.seconds();
@@ -50,7 +50,7 @@ function scrollDigit(digit, num) {
 
   if (digits[digit] !== num && !TweenMax.isTweening(elem)) {
     if (num == 0) {
-      pos = digit == 6 || digit == 4 ? -600 : -1000;
+      const pos = digit == 6 || digit == 4 ? -600 : -1000;
       TweenMax.to(elem, speed, {
         y: pos,
         ease: ease,
@@ -70,7 +70,7 @@ function fadeDigits() {
   var blank = true;
   var blankCount = 0;
   var speed = 0.5;
-  for (i = 7; i >= 4; i--) {
+  for (let i = 7; i >= 4; i--) {
     if (digits[i] !== 0) {
       blank = false;
     }
@@ -93,7 +93,7 @@ function fadeDigits() {
   prevCount = blankCount;
 }
 
-timerPos = 0;
+let timerPos = 0;
 function startTimer() {
   startTime = moment();
   timerUpdate = setInterval(function () {
@@ -118,7 +118,7 @@ function resetTimer() {
   fadeDigits();
 }
 
-running = false;
+let running = false;
 function toggleTimer() {
   running = !running;
   if (running) {
