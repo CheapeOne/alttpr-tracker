@@ -47,7 +47,7 @@ body {
 #items {
     left:8px;
     top:8px;
-    border-image: url(assets/borderG.png) 20 round;
+    border-image: url('assets/borderG.png') 20 round;
     width:372px;
     height:312px;
 }
@@ -56,7 +56,7 @@ body {
 #gear {
     left:384px;
     top:8px;
-    border-image: url(assets/borderR.png) 20 round;
+    border-image: url('assets/borderR.png') 20 round;
     width:176px;
     height:312px;
 }
@@ -65,7 +65,7 @@ body {
 #dungeons {
     left:8px;
     top:324px;
-    border-image: url(assets/borderY.png) 20 round;
+    border-image: url('assets/borderY.png') 20 round;
     width:552px;
     height:208px;
 }
@@ -75,7 +75,7 @@ body {
     position:absolute;
     left:0px;
     top:0px;
-    background-image:url(assets/grid1.png);
+    background-image:url('assets/grid1.png');
     cursor:pointer;
     margin:8px 8px;
 }
@@ -357,7 +357,7 @@ body {
 
 .map {
     position:absolute;
-    background-image:url(assets/map.png);
+    background-image:url('assets/map.png');
     background-size: 650px 1300px;
     width:650px;
     height:650px;
@@ -422,7 +422,7 @@ body {
 	border: solid 3px #000;
 	border-radius:50%;
     background-color:#7f7f7f;
-    background-image:url(assets/prizes1.png);
+    background-image:url('assets/prizes1.png');
     background-size:48px 240px;
 	background-position:-2px -2px;
 	color:#000;
@@ -573,7 +573,7 @@ input {cursor:pointer;}
 #timer {    
 	left:8px;
     top:8px;
-    border-image: url(assets/borderB.png) 20 round;
+    border-image: url('assets/borderB.png') 20 round;
     width:552px;
 	height:128px;
 	position: absolute;
