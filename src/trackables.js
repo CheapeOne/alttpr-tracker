@@ -1,4 +1,7 @@
-items = {
+import { logic } from './logic.js';
+import { settings } from './layout.js';
+
+export let items = {
   //a list of everything we're tracking-- includes all inventory items and also some other variables
   bow: { val: 0, max: 3 },
   boomerang: { val: 0, max: 3 },
@@ -87,7 +90,7 @@ items = {
   redCrystal: { val: 0, max: 2 },
 };
 
-chests = {
+export let chests = {
   0: { world: 'LW', amount: 3, xPos: 82.5, yPos: 42.5, opened: false, status: null, name: "Sahasrahla's Hut" },
   1: { world: 'LW', amount: 1, xPos: 81.0, yPos: 46.0, opened: false, status: null, name: 'Sahasrahla' },
   2: { world: 'LW', amount: 1, xPos: 97.0, yPos: 12.0, opened: false, status: null, name: 'King Zora' },
@@ -163,7 +166,7 @@ chests = {
   64: { world: 'DW', amount: 2, xPos: 4.0, yPos: 79.5, opened: false, status: null, name: 'Mire Shed' },
 };
 
-dungeons = {
+export let dungeons = {
   0: {
     world: 'LW',
     xPos: 92.9,
@@ -322,7 +325,7 @@ dungeons = {
   },
 };
 
-keyShops = {
+export let keyShops = {
   0: { world: 'LW', xPos: 71.1, yPos: 75.0, active: false, name: 'Lake Hylia Shop' },
   1: { world: 'LW', xPos: 9.4, yPos: 56.3, active: false, name: 'Kakariko Shop' },
   2: { world: 'LW', xPos: 84.0, yPos: 11.9, active: false, name: 'Death Mountain Shop' },
@@ -334,7 +337,7 @@ keyShops = {
   8: { world: 'DW', xPos: 78.9, yPos: 31.3, active: false, name: 'Dark World Potion Shop' },
 };
 
-map = {
+export const map = {
   populate: function () {
     $.each(chests, function (id, chest) {
       //places all the chest icons onto the map
@@ -419,7 +422,7 @@ map = {
     $('.dungeon').hover(
       function () {
         //Writes dungeon names to the caption when hovering
-        id = this.id.replace(/\D/g, '');
+        const id = this.id.replace(/\D/g, '');
         $('#caption').html(dungeons[id].name + ' Boss');
       },
       function () {
@@ -432,7 +435,7 @@ map = {
         //Writes chest names to the caption when hovering
 
         var states = ['UNAVAILABLE', 'AVAILABLE', 'DARK', 'POSSIBLE', 'CHECKABLE'];
-        id = this.id.replace(/\D/g, '');
+        const id = this.id.replace(/\D/g, '');
         if (this.id.indexOf('dungeonChest') >= 0) {
           $('#caption').html(dungeons[id].name + ' Chests');
         } else if (this.id.indexOf('keyShop') >= 0) {
@@ -461,8 +464,8 @@ map = {
     $('.chestPip').remove(); //clears existing chest pips
 
     $.each(dungeons, function (id, dungeon) {
-      count = dungeon['chests' + settings.keyMode]; //checks how many chests the dungeon has in this mode
-      for (chest = 1; chest <= count; chest++) {
+      const count = dungeon['chests' + settings.keyMode]; //checks how many chests the dungeon has in this mode
+      for (let chest = 1; chest <= count; chest++) {
         $('#map' + dungeon.world).append(
           '<div class=chestPip id=chestPip' +
             id +
@@ -478,10 +481,11 @@ map = {
         ); //creates the pip
 
         //calculations to figure out the position and angle of each pip
+        let pos, angle, dist;
         if (count <= 11) {
           pos = chest;
         } else {
-          len = Math.min(11, Math.round(count * (11 / 27)));
+          const len = Math.min(11, Math.round(count * (11 / 27)));
           if (chest <= len) {
             pos = chest;
           } else {
@@ -509,7 +513,7 @@ map = {
   },
 };
 
-toggle = {
+export const toggle = {
   chest: function (id) {
     //toggles a chest's open status
     chests[id].opened = !chests[id].opened;
@@ -549,18 +553,18 @@ toggle = {
 
     if (icon.id.indexOf('bigPrize') >= 0) {
       //if icon is a Bigprize, changes the target
-      num = icon.id.replace(/\D/g, '');
+      const num = icon.id.replace(/\D/g, '');
       icon = $('#prize' + num)[0];
     }
 
     if (icon.id.indexOf('abbr') >= 0) {
       //if icon is a dungeon abbr, changes the target
-      num = icon.id.replace(/\D/g, '');
+      const num = icon.id.replace(/\D/g, '');
       icon = $('#boss' + num)[0];
     }
 
     //increments or decrements the icon state
-    curVal = items[icon.id].val;
+    const curVal = items[icon.id].val;
     if (reverse == false) {
       items[icon.id].val = curVal == items[icon.id].max ? 0 : curVal + 1;
     } else {
@@ -569,14 +573,14 @@ toggle = {
 
     if (icon.id.indexOf('boss') >= 0) {
       //if it's a boss, do the boss toggle stuff
-      num = icon.id.replace(/\D/g, '');
+      const num = icon.id.replace(/\D/g, '');
       dungeons[num].completed = !dungeons[num].completed;
       $('#bigPrize' + num).toggleClass('complete', dungeons[num].completed);
     }
 
     if (icon.id.indexOf('prize') >= 0) {
       //if it's a prize, toggle the prize
-      num = icon.id.replace(/\D/g, '');
+      const num = icon.id.replace(/\D/g, '');
       dungeons[num].prize = items[icon.id].val;
       $('#dungeon' + num + ',#bigPrize' + num)
         .attr('class', function (i, c) {
@@ -638,3 +642,10 @@ toggle = {
     logic.apply();
   },
 };
+
+export function setTrackables(trackables) {
+  items = trackables.items;
+  chests = trackables.chests;
+  dungeons = trackables.dungeons;
+  keyShops = trackables.keyShops;
+}

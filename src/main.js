@@ -1,3 +1,15 @@
+import { layout, settings } from './layout.js';
+import { loadState } from './state.js';
+import { stats } from './stats.js';
+import { map, toggle } from './trackables.js';
+
+// TODO:
+// - add onclick handlers to window somewhere (here?)
+// - reorg code that interacts with the window to one place (layout / view ?)
+// - layout.js -> map.js ?
+// - handle remaining typeerrors (timer.js)
+// - resize better on mobile
+
 function main() {
   $(window).load(function () {
     layout.sizeMap($("input[name='mapAlign']:checked").val()); //arranges the maps to best fit on screen

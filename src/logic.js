@@ -1,4 +1,12 @@
-logic = {
+import { settings } from './layout.js';
+import { stats } from './stats.js';
+import { items, dungeons, chests, keyShops } from './trackables.js';
+
+// Temp file level variables.
+// TODO: clean up and use local vars instead.
+let boss, min, max, minKey, maxKey;
+
+export const logic = {
   //these functions return true or false
   darkWorldNW: function () {
     //check for access to this whole region
@@ -95,7 +103,7 @@ logic = {
   medallion: function (id) {
     //check for the correct MM/TR medallions; id is the dungeon id (8 = MM, 9 = TR)
 
-    medal = items['medal' + id].val; //identifies what medallion we want; 0 = unknown, 1 = bombos, 2 = ether, 3 = quake
+    let medal = items['medal' + id].val; //identifies what medallion we want; 0 = unknown, 1 = bombos, 2 = ether, 3 = quake
 
     return items.sword.val >= 1 //need a sword
       ? medal == 0
@@ -111,10 +119,10 @@ logic = {
   },
   //this sets the prizes in the item tracker based on completed dungeons
   setPrizes: function () {
-    counts = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, total: 0 }; //tally of each type of prize;
+    const counts = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, total: 0 }; //tally of each type of prize;
     // 0 = unknown, 1 = red/blue pend, 2 = green pend, 3 = blue crystal, 4 = red crystal
 
-    for (i = 0; i <= 9; i++) {
+    for (let i = 0; i <= 9; i++) {
       //checks each dungeon to see if it's completed and if so what its prize is
       if (dungeons[i].completed) {
         counts[dungeons[i].prize]++;
@@ -279,7 +287,7 @@ logic = {
     }, // Sanctuary
     35: function () {
       // Sewers - Secret Room
-
+      let maxKey, minKey;
       if (settings.keyMode == 2) {
         maxKey = items.keyAny.val;
         minKey = Math.max(
@@ -293,7 +301,7 @@ logic = {
         );
       }
 
-      lampTest = items.lamp.val ? 1 : 2;
+      const lampTest = items.lamp.val ? 1 : 2;
 
       return settings.openMode == 0 || items.glove.val
         ? 1
@@ -482,6 +490,8 @@ logic = {
         lamp = items.lamp.val,
         bigKey = items.bigKey0.val;
 
+      let boss, min, max;
+
       if (settings.keyMode == 1) {
         // KEY-SANITY LOGIC
 
@@ -536,6 +546,8 @@ logic = {
         key = items.key1.val,
         bigKey = items.bigKey1.val;
 
+      let boss, min, max;
+
       if (settings.keyMode == 1) {
         // KEY-SANITY LOGIC
 
@@ -587,8 +599,8 @@ logic = {
         } else {
           // RETRO LOGIC - LIMITED KEYS
 
-          maxKey = items.keyAny.val - (settings.openMode == 0 ? 1 : 0); // if standard, you must have used a key at Hyrule Castle
-          minKey = Math.max(
+          let maxKey = items.keyAny.val - (settings.openMode == 0 ? 1 : 0); // if standard, you must have used a key at Hyrule Castle
+          let minKey = Math.max(
             0, // subtracts the other places you might have spent your keys, if they are accessible
             items.keyAny.val -
               1 - //Hyrule Castle
@@ -652,6 +664,7 @@ logic = {
         light = logic.DMlight(),
         key = items.key2.val,
         bigKey = items.bigKey2.val;
+
       if (settings.keyMode == 1) {
         // KEY-SANITY LOGIC
         boss =
@@ -1576,14 +1589,14 @@ logic = {
     });
 
     $.each(logic.dungeons, function (id, test) {
-      dStatus = test();
+      const dStatus = test();
 
       dStatus.boss = dungeons[id].completed ? null : dStatus.boss;
       dungeons[id].status = dStatus.boss; //applies the test result to the dungeons object
       logic.colour('#dungeon' + id, dStatus.boss); //colours the boss by its status
 
-      total = dungeons[id]['chests' + settings.keyMode];
-      opened = dungeons[id].openChests;
+      const total = dungeons[id]['chests' + settings.keyMode];
+      const opened = dungeons[id].openChests;
 
       dStatus.chest = opened == total ? 'null' : opened < dStatus.min ? 1 : opened < dStatus.max ? 3 : 0; //figures out status of next chest based on how many opened so far & max/min available
 
@@ -1591,9 +1604,9 @@ logic = {
 
       logic.colour('#dungeonChest' + id, dStatus.chest);
 
-      for (chest = 1; chest <= total; chest++) {
+      for (let chest = 1; chest <= total; chest++) {
         //colours each chest pip based on amount opened and max/min
-        pipStatus =
+        const pipStatus =
           chest > total - opened ? 'null' : chest > total - dStatus.min ? 1 : chest > total - dStatus.max ? 3 : 0;
 
         logic.colour('#chestPip' + id + '-' + chest, pipStatus);
