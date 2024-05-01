@@ -354,7 +354,7 @@ export const map = {
           (1000 - id) +
           '>' +
           (chest.amount > 1 ? chest.amount : '') +
-          '</div>'
+          '</div>',
       );
     });
 
@@ -371,7 +371,7 @@ export const map = {
           dungeon.yPos +
           '%;z-index:' +
           (1100 - id) +
-          '></div>'
+          '></div>',
       );
       $('#map' + dungeon.world).append(
         "<div class='chest dungeonChest' onclick=toggle.dungeonChest(" +
@@ -386,7 +386,7 @@ export const map = {
           (1200 - id) +
           '>' +
           dungeon['chests' + settings.keyMode] +
-          '</div>'
+          '</div>',
       );
     });
 
@@ -413,7 +413,7 @@ export const map = {
           shop.yPos +
           '%;z-index:' +
           (1000 - id) +
-          '>F<div class=keyCirc></div></div>'
+          '>F<div class=keyCirc></div></div>',
       );
     });
 
@@ -427,7 +427,7 @@ export const map = {
       },
       function () {
         $('#caption').html('');
-      }
+      },
     );
 
     $('.chest, .keyShop').hover(
@@ -441,18 +441,18 @@ export const map = {
         } else if (this.id.indexOf('keyShop') >= 0) {
           var state = logic.keyShops[id]();
           $('#caption').html(
-            keyShops[id].name + " &nbsp;<span class='captionState" + state + "'>" + states[state] + '</span>'
+            keyShops[id].name + " &nbsp;<span class='captionState" + state + "'>" + states[state] + '</span>',
           );
         } else {
           var state = logic.chests[id]();
           $('#caption').html(
-            chests[id].name + " &nbsp;<span class='captionState" + state + "'>" + states[state] + '</span>'
+            chests[id].name + " &nbsp;<span class='captionState" + state + "'>" + states[state] + '</span>',
           );
         }
       },
       function () {
         $('#caption').html('');
-      }
+      },
     );
 
     $('.icon, .dungeonChest, #timer').on('contextmenu', function () {
@@ -477,7 +477,7 @@ export const map = {
             dungeon.yPos +
             '%;z-index:' +
             (1100 - id) +
-            '></div>'
+            '></div>',
         ); //creates the pip
 
         //calculations to figure out the position and angle of each pip

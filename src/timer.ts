@@ -82,8 +82,15 @@ function fadeDigits() {
   }
 
   if (typeof prevCount == 'undefined' || prevCount !== blankCount) {
-    xOffset =
-      blankCount == 4 ? -86.5 : blankCount == 3 ? -66.5 : blankCount == 2 ? -35.5 : blankCount == 1 ? -16.5 : 14;
+    xOffset = blankCount == 4
+      ? -86.5
+      : blankCount == 3
+      ? -66.5
+      : blankCount == 2
+      ? -35.5
+      : blankCount == 1
+      ? -16.5
+      : 14;
 
     if (!TweenMax.isTweening('#timerWrap')) {
       TweenMax.to('#timerWrap .timerDigit,.colon', speed, { x: xOffset, ease: Back.easeOut.config(3) });

@@ -1,7 +1,7 @@
-import { layout, settings } from './layout';
-import { loadState } from './state';
-import { stats } from './stats';
-import { map, toggle } from './trackables';
+import { layout, settings } from './layout.ts';
+import { loadState } from './state.ts';
+import { stats } from './stats.ts';
+import { map, toggle } from './trackables.ts';
 
 // TODO:
 // - add onclick handlers to window somewhere (here?)
@@ -33,7 +33,7 @@ function main() {
       $(this).attr('title', $(this).attr('tooltip-data'));
       $(this).removeAttr('tooltip-data');
       $('#caption').html('');
-    }
+    },
   );
 
   $('.icon').hover(
@@ -46,7 +46,7 @@ function main() {
       } else {
         stats.find('boss10');
       }
-    }
+    },
   );
 
   $('.icon').mousedown(function (event) {

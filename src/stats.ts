@@ -1,6 +1,6 @@
-import { settings } from './layout';
-import { logic } from './logic';
-import { items, dungeons, chests } from './trackables';
+import { settings } from './layout.ts';
+import { logic } from './logic.ts';
+import { chests, dungeons, items } from './trackables.ts';
 
 export const statsTable = {};
 
@@ -24,10 +24,9 @@ function merge_array(array1, array2) {
 
 export const stats = {
   goList0: function () {
-    var bow =
-        settings.keyMode == 2
-          ? (items.bow.val == 2 && items.keyShopFound.val) || items.bow.val == 3
-          : items.bow.val >= 2,
+    var bow = settings.keyMode == 2
+        ? (items.bow.val == 2 && items.keyShopFound.val) || items.bow.val == 3
+        : items.bow.val >= 2,
       lamp = items.lamp.val,
       bigKey = items.bigKey0.val;
 
@@ -39,10 +38,9 @@ export const stats = {
   goList1: function () {
     var entry = logic.entry1(),
       fire = logic.fire(),
-      bow =
-        settings.keyMode == 2
-          ? (items.bow.val == 2 && items.keyShopFound.val) || items.bow.val == 3
-          : items.bow.val >= 2,
+      bow = settings.keyMode == 2
+        ? (items.bow.val == 2 && items.keyShopFound.val) || items.bow.val == 3
+        : items.bow.val >= 2,
       fightLanmo = items.hammer.val || items.sword.val >= 1 || bow || logic.cane() || logic.rod(),
       list = [
         items.glove.val == 0 || (!entry && items.glove.val !== 2) ? 'glove' : '',
@@ -90,10 +88,9 @@ export const stats = {
   goList3: function () {
     var entry = logic.entry3(),
       hammer = items.hammer.val,
-      bow =
-        settings.keyMode == 2
-          ? (items.bow.val == 2 && items.keyShopFound.val) || items.bow.val == 3
-          : items.bow.val >= 2,
+      bow = settings.keyMode == 2
+        ? (items.bow.val == 2 && items.keyShopFound.val) || items.bow.val == 3
+        : items.bow.val >= 2,
       key = items.key3.val,
       bigKey = items.bigKey3.val,
       list = [
@@ -109,10 +106,9 @@ export const stats = {
   },
   goList4: function () {
     var entry = logic.entry4(),
-      bow =
-        settings.keyMode == 2
-          ? (items.bow.val == 2 && items.keyShopFound.val) || items.bow.val == 3
-          : items.bow.val >= 2,
+      bow = settings.keyMode == 2
+        ? (items.bow.val == 2 && items.keyShopFound.val) || items.bow.val == 3
+        : items.bow.val >= 2,
       darkWorldSouth = logic.darkWorldSouth(),
       hammer = items.hammer.val,
       hookshot = items.hookshot.val,
@@ -204,10 +200,9 @@ export const stats = {
       fire = firerod || lamp,
       key = items.key8.val,
       bigKey = items.bigKey8.val,
-      bow =
-        settings.keyMode == 2
-          ? (items.bow.val == 2 && items.keyShopFound.val) || items.bow.val == 3
-          : items.bow.val >= 2,
+      bow = settings.keyMode == 2
+        ? (items.bow.val == 2 && items.keyShopFound.val) || items.bow.val == 3
+        : items.bow.val >= 2,
       fightVit = entry && somaria && (items.sword.val >= 1 || bow),
       medallion = logic.medallion(8);
 
@@ -312,7 +307,7 @@ export const stats = {
   fetch: function () {
     $.ajax({
       type: 'GET',
-      url: '/assets/stats_standard_random.csv',
+      url: '/images/stats_standard_random.csv',
       dataType: 'text',
       success: function (data) {
         //convert the CSV into a javascript object
