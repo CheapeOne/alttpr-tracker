@@ -1,4 +1,4 @@
-import { items, chests, dungeons, keyShops, setTrackables } from './trackables';
+import { chests, dungeons, items, keyShops, setTrackables } from './trackables.ts';
 
 /**
  * Save and load the state of the tracker with local storage.
@@ -6,6 +6,19 @@ import { items, chests, dungeons, keyShops, setTrackables } from './trackables';
 
 const TRACKABLES_KEY = 'trackables';
 const STYLES_KEY = 'styles';
+
+type Trackables = {
+  items: any;
+  chests: any;
+  dungeons: any;
+  keyShops: any;
+};
+
+type Style = {
+  id: string;
+  class: string;
+  style: string;
+};
 
 function _saveTrackables() {
   const trackables = {
@@ -22,7 +35,7 @@ function _saveStyles() {
   const groups = ['#items > div', '#gear > div', '#dungeons > div', '#mapLW > div', '#mapDW > div'];
   const selector = groups.join(', ');
   const styledDivs = $(selector)
-    .filter(function (index, div) {
+    .filter((index, div) => {
       return Boolean(div.id);
     })
     .toArray();
@@ -46,7 +59,14 @@ function saveState() {
   _saveStyles();
 }
 
-function _loadStyle(style) {
+function _loadStyles() {
+  const styles = JSON.parse(window.localStorage.getItem(STYLES_KEY) as string) as Style[];
+  if (styles) {
+    styles.forEach(_loadStyle);
+  }
+}
+
+function _loadStyle(style: Style) {
   const results = $('#' + style.id);
   if (!results || !results.length) {
     return;
@@ -57,15 +77,8 @@ function _loadStyle(style) {
   div.style.cssText = style.style;
 }
 
-function _loadStyles() {
-  const styles = JSON.parse(window.localStorage.getItem(STYLES_KEY));
-  if (styles) {
-    styles.forEach(_loadStyle);
-  }
-}
-
 function _loadTrackables() {
-  const trackables = JSON.parse(window.localStorage.getItem(TRACKABLES_KEY));
+  const trackables = JSON.parse(window.localStorage.getItem(TRACKABLES_KEY) as string);
   if (trackables) {
     setTrackables(trackables);
     // items = trackables.items;
@@ -88,7 +101,7 @@ export function resetState() {
 }
 
 export function showResetModal() {
-  const resetPrompt = /** @type {HTMLDialogElement} */ document.getElementById('resetPrompt');
+  const resetPrompt = document.getElementById('resetPrompt') as HTMLDialogElement;
   resetPrompt.showModal();
 }
 

@@ -7,6 +7,11 @@ This tracker was forked from [ItsSupercar/alttpr-Tracker](https://github.com/Its
 - PWA support: The page can now be installed to the homepage as a progressive web app (PWA). This also allows you to track while offline.
 - Reset button
 
+Development:
+
+Added build step to minify code and migrate to typescript. Redeveloped to use [deno](https://deno.com/) and [vite](https://vitejs.dev/).
+
+
 The following is the original readme.
 
 ---

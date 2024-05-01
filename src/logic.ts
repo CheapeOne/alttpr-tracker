@@ -1,6 +1,6 @@
-import { settings } from './layout';
-import { stats } from './stats';
-import { items, dungeons, chests, keyShops } from './trackables';
+import { settings } from './layout.ts';
+import { stats } from './stats.ts';
+import { chests, dungeons, items, keyShops } from './trackables.ts';
 
 // Temp file level variables.
 // TODO: clean up and use local vars instead.
@@ -14,7 +14,9 @@ export const logic = {
       items.pearl.val && //need this of course
       (items.glove.val >= 2 || //kakariko portal
         (items.glove.val >= 1 && items.hammer.val) || //kakariko portal
-        (items.boss11.val && items.hookshot.val && (items.hammer.val || items.glove.val || items.flippers.val))) //agahnim then river crossing
+        (items.boss11.val &&
+          items.hookshot.val &&
+          (items.hammer.val || items.glove.val || items.flippers.val))) //agahnim then river crossing
     );
   },
   darkWorldEast: function () {
@@ -40,7 +42,10 @@ export const logic = {
     return items.glove.val || items.flute.val;
   }, //can get up Death Mountain
   eastDM: function () {
-    return logic.climbDM() && (items.hookshot.val || (items.mirror.val && items.hammer.val));
+    return (
+      logic.climbDM() &&
+      (items.hookshot.val || (items.mirror.val && items.hammer.val))
+    );
   }, //can get to EDM
   darkEastDM: function () {
     return logic.eastDM() && items.pearl.val && items.glove.val >= 2;
@@ -59,10 +64,16 @@ export const logic = {
     return true;
   },
   entry1: function () {
-    return items.book.val || (items.glove.val >= 2 && items.flute.val && items.mirror.val);
+    return (
+      items.book.val ||
+      (items.glove.val >= 2 && items.flute.val && items.mirror.val)
+    );
   },
   entry2: function () {
-    return logic.climbDM() && (items.mirror.val || (items.hookshot.val && items.hammer.val));
+    return (
+      logic.climbDM() &&
+      (items.mirror.val || (items.hookshot.val && items.hammer.val))
+    );
   },
   entry3: function () {
     return logic.darkWorldEast();
@@ -85,7 +96,12 @@ export const logic = {
     );
   },
   entry8: function () {
-    return items.pearl.val && items.glove.val >= 2 && items.flute.val && (items.boots.val || items.hookshot.val);
+    return (
+      items.pearl.val &&
+      items.glove.val >= 2 &&
+      items.flute.val &&
+      (items.boots.val || items.hookshot.val)
+    );
   },
   entry9: function () {
     return logic.darkEastDM() && items.hammer.val && items.somaria.val;
@@ -112,7 +128,9 @@ export const logic = {
           : items.bombos.val || items.ether.val || items.quake.val
           ? 3
           : 0 //if at least one medallion, maybe ok; otherwise nope
-        : (medal == 1 && items.bombos.val) || (medal == 2 && items.ether.val) || (medal == 3 && items.quake.val) //medallion is known and we need a specific one
+        : (medal == 1 && items.bombos.val) ||
+            (medal == 2 && items.ether.val) ||
+            (medal == 3 && items.quake.val) //medallion is known and we need a specific one
         ? 1 //has the specific matching medallion
         : 0 //does not have the matching medallion
       : 0; //no sword, cannot use any medallions
@@ -188,7 +206,10 @@ export const logic = {
     },
     7: function () {
       // King's Tomb
-      return items.boots.val && (items.glove.val >= 2 || (logic.darkWorldNW() && items.mirror.val)) ? 1 : 0;
+      return items.boots.val &&
+          (items.glove.val >= 2 || (logic.darkWorldNW() && items.mirror.val))
+        ? 1
+        : 0;
     },
     8: function () {
       return 1;
@@ -210,7 +231,10 @@ export const logic = {
     }, // Bottle Merchant
     14: function () {
       // Magic Bat
-      return items.powder.val && (items.hammer.val || (logic.darkWorldNW() && items.mirror.val));
+      return (
+        items.powder.val &&
+        (items.hammer.val || (logic.darkWorldNW() && items.mirror.val))
+      );
     },
     15: function () {
       return items.bottle.val >= 1 ? 1 : 0;
@@ -247,11 +271,13 @@ export const logic = {
     }, // Hobo
     26: function () {
       // Bombos Tablet
-      return items.book.val && items.mirror.val && logic.darkWorldSouth() ? (items.sword.val >= 2 ? 1 : 4) : 0;
+      return items.book.val && items.mirror.val && logic.darkWorldSouth() ? items.sword.val >= 2 ? 1 : 4 : 0;
     },
     27: function () {
       // Cave 45
-      return items.mirror.val && (logic.darkWorldNW() || (items.boss11.val && items.pearl.val && items.hammer.val))
+      return items.mirror.val &&
+          (logic.darkWorldNW() ||
+            (items.boss11.val && items.pearl.val && items.hammer.val))
         ? 1
         : 0;
     },
@@ -273,8 +299,10 @@ export const logic = {
       // Lake Hylia Island
       return items.flippers.val
         ? items.pearl.val &&
-          items.mirror.val &&
-          (items.boss11.val || items.glove.val >= 2 || (items.glove.val && items.hammer.val))
+            items.mirror.val &&
+            (items.boss11.val ||
+              items.glove.val >= 2 ||
+              (items.glove.val && items.hammer.val))
           ? 1
           : 4
         : 4;
@@ -297,7 +325,7 @@ export const logic = {
             (logic.entry2() ? 1 : 0) -
             (logic.entry3() ? 6 : 0) -
             (logic.entry4() ? 1 : 0) -
-            (logic.entry11() ? 2 : 0)
+            (logic.entry11() ? 2 : 0),
         );
       }
 
@@ -306,15 +334,9 @@ export const logic = {
       return settings.openMode == 0 || items.glove.val
         ? 1
         : settings.keyMode == 1
-        ? items.key12.val
-          ? lampTest
-          : 0
+        ? items.key12.val ? lampTest : 0
         : settings.keyMode == 2 && items.keyShopFound.val == 0
-        ? maxKey >= 1
-          ? minKey >= 1
-            ? lampTest
-            : 3
-          : 0
+        ? maxKey >= 1 ? minKey >= 1 ? lampTest : 3 : 0
         : lampTest;
     },
     36: function () {
@@ -337,17 +359,15 @@ export const logic = {
     },
     41: function () {
       // Ether Tablet
-      return items.book.val && logic.climbDM() && (items.mirror.val || (items.hookshot.val && items.hammer.val))
-        ? items.sword.val >= 2
-          ? logic.DMlight()
-            ? 1
-            : 2
-          : 4
+      return items.book.val &&
+          logic.climbDM() &&
+          (items.mirror.val || (items.hookshot.val && items.hammer.val))
+        ? items.sword.val >= 2 ? logic.DMlight() ? 1 : 2 : 4
         : 0;
     },
     42: function () {
       // Spectacle Rock
-      return logic.climbDM() ? (items.mirror.val ? (logic.DMlight() ? 1 : 2) : 4) : 0;
+      return logic.climbDM() ? items.mirror.val ? logic.DMlight() ? 1 : 2 : 4 : 0;
     },
     43: function () {
       // Spiral Cave
@@ -357,18 +377,12 @@ export const logic = {
       // Mimic Cave
 
       return !(settings.keyMode == 1 && items.key9.val < 2) &&
-        items.pearl.val &&
-        items.hammer.val &&
-        items.glove.val >= 2 &&
-        items.somaria.val &&
-        items.mirror.val
-        ? logic.medallion(9) !== 1
-          ? logic.medallion(9)
-          : items.firerod.val
-          ? logic.DMlight()
-            ? 1
-            : 2
-          : 3
+          items.pearl.val &&
+          items.hammer.val &&
+          items.glove.val >= 2 &&
+          items.somaria.val &&
+          items.mirror.val
+        ? logic.medallion(9) !== 1 ? logic.medallion(9) : items.firerod.val ? logic.DMlight() ? 1 : 2 : 3
         : 0;
     },
     45: function () {
@@ -378,38 +392,34 @@ export const logic = {
     46: function () {
       // Floating Island
       return logic.eastDM()
-        ? items.mirror.val && items.pearl.val && items.glove.val >= 2
-          ? logic.DMlight()
-            ? 1
-            : 2
-          : 4
+        ? items.mirror.val && items.pearl.val && items.glove.val >= 2 ? logic.DMlight() ? 1 : 2 : 4
         : 0;
     },
     47: function () {
       // Superbunny Cave
 
-      return items.pearl.val && items.glove.val >= 2 && logic.eastDM() ? (logic.DMlight() ? 1 : 2) : 0;
+      return items.pearl.val && items.glove.val >= 2 && logic.eastDM() ? logic.DMlight() ? 1 : 2 : 0;
     },
     48: function () {
       // Hookshot Cave
-      return items.pearl.val && items.glove.val >= 2 && items.hookshot.val ? (logic.DMlight() ? 1 : 2) : 0;
+      return items.pearl.val && items.glove.val >= 2 && items.hookshot.val ? logic.DMlight() ? 1 : 2 : 0;
     },
     49: function () {
       // Hookshot Cave - Bottom Chest
       return items.pearl.val &&
-        items.glove.val >= 2 &&
-        (items.hookshot.val || (items.mirror.val && items.hammer.val && items.boots.val))
-        ? logic.DMlight()
-          ? 1
-          : 2
+          items.glove.val >= 2 &&
+          (items.hookshot.val ||
+            (items.mirror.val && items.hammer.val && items.boots.val))
+        ? logic.DMlight() ? 1 : 2
         : 0;
     },
     50: function () {
       // Spike Cave
-      return items.pearl.val && items.glove.val && items.hammer.val && (items.byrna.val || items.cape.val)
-        ? logic.DMlight()
-          ? 1
-          : 2
+      return items.pearl.val &&
+          items.glove.val &&
+          items.hammer.val &&
+          (items.byrna.val || items.cape.val)
+        ? logic.DMlight() ? 1 : 2
         : 0;
     },
     51: function () {
@@ -424,7 +434,10 @@ export const logic = {
     53: function () {
       // Pyramid Fairy
 
-      return items.redCrystal.val >= 2 && (items.boss11.val || logic.darkWorldEast()) ? 1 : 0;
+      return items.redCrystal.val >= 2 &&
+          (items.boss11.val || logic.darkWorldEast())
+        ? 1
+        : 0;
     },
     54: function () {
       // Brewery
@@ -444,7 +457,7 @@ export const logic = {
     },
     58: function () {
       // Bumper Cave
-      return logic.darkWorldNW() ? (items.glove.val && items.cape.val ? 1 : 4) : 0;
+      return logic.darkWorldNW() ? items.glove.val && items.cape.val ? 1 : 4 : 0;
     },
     59: function () {
       // BlackSmith
@@ -483,10 +496,10 @@ export const logic = {
   dungeons: {
     0: function () {
       // Eastern Palace
-      var bow =
-          settings.keyMode == 2
-            ? (items.bow.val == 2 && items.keyShopFound.val) || items.bow.val == 3
-            : items.bow.val >= 2,
+      var bow = settings.keyMode == 2
+          ? (items.bow.val == 2 && items.keyShopFound.val) ||
+            items.bow.val == 3
+          : items.bow.val >= 2,
         lamp = items.lamp.val,
         bigKey = items.bigKey0.val;
 
@@ -495,30 +508,23 @@ export const logic = {
       if (settings.keyMode == 1) {
         // KEY-SANITY LOGIC
 
-        boss =
-          bow && bigKey // need these to reach
-            ? lamp
-              ? 1
-              : 2 // boss accessible; light determines status
-            : 0;
+        boss = bow && bigKey // need these to reach
+          ? lamp ? 1 : 2 // boss accessible; light determines status
+          : 0;
 
-        min =
-          3 + // base access
+        min = 3 + // base access
           (lamp ? 1 : 0) + // BK chest
           (bigKey ? 1 : 0) + // big chest
           (lamp && bigKey && bow ? 1 : 0); // boss
 
-        max =
-          4 + // base access (includes BK chest regardless of lamp)
+        max = 4 + // base access (includes BK chest regardless of lamp)
           (bigKey ? 1 : 0) + // big chest
           (bigKey && bow ? 1 : 0); // boss
       } else {
         // REGULAR AND RETRO LOGIC
 
         boss = bow // need this to reach
-          ? lamp
-            ? 1
-            : 2 // boss accessible; light determines status
+          ? lamp ? 1 : 2 // boss accessible; light determines status
           : 0;
 
         min = lamp
@@ -537,11 +543,16 @@ export const logic = {
       var entry = logic.entry1(),
         glove = items.glove.val,
         reachLanmo = entry && logic.fire() && glove,
-        bow =
-          settings.keyMode == 2
-            ? (items.bow.val == 2 && items.keyShopFound.val) || items.bow.val == 3
-            : items.bow.val >= 2,
-        fightLanmo = reachLanmo && (items.hammer.val || items.sword.val >= 1 || bow || logic.cane() || logic.rod()),
+        bow = settings.keyMode == 2
+          ? (items.bow.val == 2 && items.keyShopFound.val) ||
+            items.bow.val == 3
+          : items.bow.val >= 2,
+        fightLanmo = reachLanmo &&
+          (items.hammer.val ||
+            items.sword.val >= 1 ||
+            bow ||
+            logic.cane() ||
+            logic.rod()),
         boots = items.boots.val,
         key = items.key1.val,
         bigKey = items.bigKey1.val;
@@ -551,12 +562,9 @@ export const logic = {
       if (settings.keyMode == 1) {
         // KEY-SANITY LOGIC
 
-        boss =
-          fightLanmo && bigKey
-            ? key
-              ? 1
-              : 3 // if no key, player might steal pot key for chests and lock themselves out of boss
-            : 0;
+        boss = fightLanmo && bigKey
+          ? key ? 1 : 3 // if no key, player might steal pot key for chests and lock themselves out of boss
+          : 0;
 
         min = entry
           ? 1 + // base access
@@ -571,9 +579,7 @@ export const logic = {
             (boots ? 1 : 0) + // torch
             (bigKey ? 1 : 0) + // big chest
             (glove
-              ? key && fightLanmo && bigKey
-                ? 3
-                : 2 // if fully equipped, can get 3; otherwise, stealing key gives 2
+              ? key && fightLanmo && bigKey ? 3 : 2 // if fully equipped, can get 3; otherwise, stealing key gives 2
               : key
               ? 2
               : 0) // if no glove, need key to get 2 chests (no boss)
@@ -583,9 +589,7 @@ export const logic = {
           // RETRO LOGIC - INFINITE KEYS
 
           boss = fightLanmo // have inventory to fight the boss
-            ? boots
-              ? 1
-              : 3 // big key might be on torch, so if missing boots, boss access unknown
+            ? boots ? 1 : 3 // big key might be on torch, so if missing boots, boss access unknown
             : 0;
 
           min = entry
@@ -607,22 +611,19 @@ export const logic = {
               (logic.entry2() ? 1 : 0) - //Tower of Hera
               (logic.entry3() ? 6 : 0) - //Palace of Darkness
               (logic.entry4() ? 1 : 0) - //Swamp Palace
-              (logic.entry11() ? 2 : 0) //Agahnim
+              (logic.entry11() ? 2 : 0), //Agahnim
           );
 
           boss = fightLanmo
-            ? minKey >= 1 && boots
-              ? 1
-              : 3 // if missing boots or if key uncertain, boss state unknown
+            ? minKey >= 1 && boots ? 1 : 3 // if missing boots or if key uncertain, boss state unknown
             : 0;
 
-          min =
-            entry && minKey >= 1
-              ? boots
-                ? 2 + // boots guarantee accessing everything but boss
-                  (fightLanmo ? 1 : 0) // if boss beatable too, can definitely get all
-                : 1 // if BK on torch and map/compass in small chests, can only get 1 item
-              : 0;
+          min = entry && minKey >= 1
+            ? boots
+              ? 2 + // boots guarantee accessing everything but boss
+                (fightLanmo ? 1 : 0) // if boss beatable too, can definitely get all
+              : 1 // if BK on torch and map/compass in small chests, can only get 1 item
+            : 0;
 
           max = entry
             ? 1 + //map chest
@@ -637,9 +638,7 @@ export const logic = {
         // REGULAR LOGIC
 
         boss = fightLanmo
-          ? boots
-            ? 1
-            : 3 // if no boots, boss state unknown
+          ? boots ? 1 : 3 // if no boots, boss state unknown
           : 0;
 
         min = entry
@@ -667,12 +666,9 @@ export const logic = {
 
       if (settings.keyMode == 1) {
         // KEY-SANITY LOGIC
-        boss =
-          fightMold && bigKey // requirements for boss
-            ? light
-              ? 1
-              : 2 // checks if player had to use dark room to climb Death Mountain
-            : 0;
+        boss = fightMold && bigKey // requirements for boss
+          ? light ? 1 : 2 // checks if player had to use dark room to climb Death Mountain
+          : 0;
 
         max = entry
           ? 2 + //base access
@@ -688,17 +684,14 @@ export const logic = {
 
           boss = fightMold
             ? fire
-              ? light
-                ? 1
-                : 2 // checks if player had to use dark room to climb Death Mountain
+              ? light ? 1 : 2 // checks if player had to use dark room to climb Death Mountain
               : 3 // big key might be in basement, locking out boss
             : 0;
 
-          min =
-            entry && light && fire
-              ? 2 + // can open every chest and get at least 2 items
-                (fightMold ? 1 : 0) // can also get 3rd item, if boss has it
-              : 0; // if basement required, might get no items
+          min = entry && light && fire
+            ? 2 + // can open every chest and get at least 2 items
+              (fightMold ? 1 : 0) // can also get 3rd item, if boss has it
+            : 0; // if basement required, might get no items
 
           max = entry ? 3 : 0; // 3 items and big key could be in first 4 chests opened
         } else {
@@ -712,23 +705,19 @@ export const logic = {
               (logic.entry1() ? 1 : 0) - // Desert Palace
               (logic.entry3() ? 6 : 0) - // Palace of Darkness
               (logic.entry4() ? 1 : 0) - // Swamp Palace
-              (logic.entry11() ? 2 : 0) // Agahnim
+              (logic.entry11() ? 2 : 0), // Agahnim
           );
 
-          boss =
-            fightMold && maxKey >= 1
-              ? fire && minKey >= 1
-                ? light
-                  ? 1
-                  : 2 // checks if player had to use dark room to climb Death Mountain
-                : 3 // big key might be in basement, locking out boss
-              : 0;
+          boss = fightMold && maxKey >= 1
+            ? fire && minKey >= 1
+              ? light ? 1 : 2 // checks if player had to use dark room to climb Death Mountain
+              : 3 // big key might be in basement, locking out boss
+            : 0;
 
-          min =
-            entry && light && fire && minKey >= 1
-              ? 2 + // can open every chest and get at least 2 items
-                (fightMold ? 1 : 0) // can also get 3rd item, if boss has it
-              : 0; // if basement required, might get no items
+          min = entry && light && fire && minKey >= 1
+            ? 2 + // can open every chest and get at least 2 items
+              (fightMold ? 1 : 0) // can also get 3rd item, if boss has it
+            : 0; // if basement required, might get no items
 
           max = entry ? 3 : 0; // 3 items and big key could be in first 4 chests opened
         }
@@ -737,17 +726,14 @@ export const logic = {
 
         boss = fightMold
           ? fire
-            ? light
-              ? 1
-              : 2 // checks if player had to use dark room to climb Death Mountain
+            ? light ? 1 : 2 // checks if player had to use dark room to climb Death Mountain
             : 3 // big key might be in basement, locking out boss
           : 0;
 
-        min =
-          entry && light && fire
-            ? 1 + // can open every chest and get at least 1 item
-              (fightMold ? 1 : 0) // can also get 2nd item, if boss has it
-            : 0; // if basement required, might get no items
+        min = entry && light && fire
+          ? 1 + // can open every chest and get at least 1 item
+            (fightMold ? 1 : 0) // can also get 2nd item, if boss has it
+          : 0; // if basement required, might get no items
 
         max = entry ? 2 : 0; // 2 items and big key could be in first 3 chests opened
       }
@@ -760,10 +746,10 @@ export const logic = {
       var entry = logic.entry3(),
         lamp = items.lamp.val,
         hammer = items.hammer.val,
-        bow =
-          settings.keyMode == 2
-            ? (items.bow.val == 2 && items.keyShopFound.val) || items.bow.val == 3
-            : items.bow.val >= 2,
+        bow = settings.keyMode == 2
+          ? (items.bow.val == 2 && items.keyShopFound.val) ||
+            items.bow.val == 3
+          : items.bow.val >= 2,
         hamBow = hammer && bow,
         key = items.key3.val,
         bigKey = items.bigKey3.val,
@@ -771,14 +757,11 @@ export const logic = {
       if (settings.keyMode == 1) {
         // KEY-SANITY LOGIC
 
-        boss =
-          entry && hamBow && bigKey && key >= 1 // need all this for boss
-            ? key == 6
-              ? lamp
-                ? 1
-                : 2 // checks if player has to go through dark
-              : 3 // if less than 6 keys, might spend them all elsewhere
-            : 0;
+        boss = entry && hamBow && bigKey && key >= 1 // need all this for boss
+          ? key == 6
+            ? lamp ? 1 : 2 // checks if player has to go through dark
+            : 3 // if less than 6 keys, might spend them all elsewhere
+          : 0;
 
         min = entry
           ? 1 + // first chest
@@ -812,9 +795,7 @@ export const logic = {
           // RETRO LOGIC - INFINITE KEYS
 
           boss = fightHelm // need for boss
-            ? lamp
-              ? 1
-              : 2 // checks if player has to go through dark
+            ? lamp ? 1 : 2 // checks if player has to go through dark
             : 0;
 
           min = entry
@@ -831,8 +812,7 @@ export const logic = {
         } else {
           // RETRO LOGIC - LIMITED KEYS
 
-          maxKey =
-            items.keyAny.val -
+          maxKey = items.keyAny.val -
             (settings.openMode == 0 ? 1 : 0) - // if standard, you must have used a key at Hyrule Castle
             2; // if less than 5 shops accessible, must have come via Agahnim
 
@@ -843,17 +823,14 @@ export const logic = {
               (logic.entry1() ? 1 : 0) - // Desert Palace
               (logic.entry2() ? 1 : 0) - // Tower of Hera
               (logic.entry4() ? 1 : 0) - // Swamp Palace
-              2 // Agahnim
+              2, // Agahnim
           );
 
-          boss =
-            entry && hamBow && maxKey >= 1 // need to have at least 1 key
-              ? minKey >= 6
-                ? lamp
-                  ? 1
-                  : 2 // checks if player has to go through dark
-                : 3 // if less than 6 guaranteed keys, boss status unknown
-              : 0;
+          boss = entry && hamBow && maxKey >= 1 // need to have at least 1 key
+            ? minKey >= 6
+              ? lamp ? 1 : 2 // checks if player has to go through dark
+              : 3 // if less than 6 guaranteed keys, boss status unknown
+            : 0;
 
           min = entry
             ? (minKey >= 2 ? 1 : 0) +
@@ -889,17 +866,12 @@ export const logic = {
         // REGULAR LOGIC
 
         boss = fightHelm // need for boss
-          ? lamp
-            ? 1
-            : 2 // checks if player has to go through dark
+          ? lamp ? 1 : 2 // checks if player has to go through dark
           : 0;
 
-        min =
-          entry && bow && lamp // if fully equipped, can do whole dungeon except boss
-            ? hammer
-              ? 5
-              : 4 // if hammer, can do boss too
-            : 0;
+        min = entry && bow && lamp // if fully equipped, can do whole dungeon except boss
+          ? hammer ? 5 : 4 // if hammer, can do boss too
+          : 0;
 
         max = entry ? 5 : 0; // can possibly get this many just by entering
       }
@@ -935,11 +907,10 @@ export const logic = {
 
           boss = fightArrg ? 1 : 0;
 
-          min =
-            entry && hammer
-              ? 3 + // main dungeon access guarantees 3
-                (hookshot ? 4 : 0) // can clear full dungeon
-              : 0;
+          min = entry && hammer
+            ? 3 + // main dungeon access guarantees 3
+              (hookshot ? 4 : 0) // can clear full dungeon
+            : 0;
 
           max = entry
             ? 2 + // first 2 chests
@@ -949,8 +920,7 @@ export const logic = {
         } else {
           // RETRO LOGIC - LIMITED KEYS
 
-          maxKey =
-            items.keyAny.val -
+          maxKey = items.keyAny.val -
             (settings.openMode == 0 ? 1 : 0) - // if standard, you must have used a key at Hyrule Castle
             2; // if less than 5 shops accessible, must have come via Agahnim
 
@@ -961,21 +931,17 @@ export const logic = {
               (logic.entry1() ? 1 : 0) - // Desert Palace
               (logic.entry2() ? 1 : 0) - // Tower of Hera
               (logic.entry3() ? 6 : 0) - // Palace of Darkness
-              2 // Agahnim
+              2, // Agahnim
           );
 
-          boss =
-            fightArrg && maxKey >= 1
-              ? minKey >= 1
-                ? 1
-                : 3 // if 1 key not guaranteed, boss state unknown
-              : 0;
+          boss = fightArrg && maxKey >= 1
+            ? minKey >= 1 ? 1 : 3 // if 1 key not guaranteed, boss state unknown
+            : 0;
 
-          min =
-            entry && minKey >= 1
-              ? (hammer ? 3 : 0) + // main dungeon access guarantees 3
-                (hammer && hookshot ? 4 : 0) // can clear full dungeon
-              : 0;
+          min = entry && minKey >= 1
+            ? (hammer ? 3 : 0) + // main dungeon access guarantees 3
+              (hammer && hookshot ? 4 : 0) // can clear full dungeon
+            : 0;
 
           max = entry
             ? 1 + // first chest
@@ -1045,11 +1011,10 @@ export const logic = {
 
         boss = fightMoth ? 1 : 0; //boss reqs
 
-        min =
-          entry && firerod
-            ? 1 + // both might be in phase 3
-              (sword ? 1 : 0) // last might be on boss
-            : 0;
+        min = entry && firerod
+          ? 1 + // both might be in phase 3
+            (sword ? 1 : 0) // last might be on boss
+          : 0;
 
         max = entry ? 2 : 0; // chance of finding both in 1st/2nd phases
       }
@@ -1120,7 +1085,11 @@ export const logic = {
         // KEY-SANITY LOGIC
 
         boss = fightKhold
-          ? bigKey && key >= 1 && ((spikeWalk && somaria) || (spikeWalk && key == 2) || (somaria && key == 2))
+          ? bigKey &&
+              key >= 1 &&
+              ((spikeWalk && somaria) ||
+                (spikeWalk && key == 2) ||
+                (somaria && key == 2))
             ? 1
             : 3 //boss reqs; need 2 out of 3-- 2nd key, somaria, and/or spikeWalk to get a free key with
           : 0;
@@ -1130,7 +1099,13 @@ export const logic = {
             (bigKey ? 1 : 0) + // big chest
             ((key == 0 && hookshot) || (key >= 1 && spikeWalk) ? 1 : 0) + // spike chest -- specifically need hookshot if 0 keys, otherwise any spike safety will do
             (hammer && ((key == 0 && hookshot) || (key >= 1 && spikeWalk)) ? 2 : 0) + // map chest, BK chest -- specifically need hookshot if 0 keys, otherwise any spike safety will do
-            (key >= 1 && hammer && ((spikeWalk && somaria) || (spikeWalk && key == 2) || (somaria && key == 2)) ? 1 : 0) //boss: need 2 out of 3-- 2nd key, somaria, and/or spikeWalk to get a free key with
+            (key >= 1 &&
+                hammer &&
+                ((spikeWalk && somaria) ||
+                  (spikeWalk && key == 2) ||
+                  (somaria && key == 2))
+              ? 1
+              : 0) //boss: need 2 out of 3-- 2nd key, somaria, and/or spikeWalk to get a free key with
           : 0;
 
         max = entry
@@ -1142,9 +1117,7 @@ export const logic = {
         // RETRO LOGIC
 
         boss = fightKhold //boss reqs
-          ? spikeWalk
-            ? 1
-            : 3 //big key might be past spikes
+          ? spikeWalk ? 1 : 3 //big key might be past spikes
           : 0;
 
         min = entry
@@ -1155,17 +1128,13 @@ export const logic = {
           : 0;
 
         max = entry
-          ? hammer
-            ? 5
-            : 4 // if hammer, can get all; otherwise best case is 4
+          ? hammer ? 5 : 4 // if hammer, can get all; otherwise best case is 4
           : 0;
       } else {
         // REGULAR LOGIC
 
         boss = fightKhold
-          ? hookshot
-            ? 1
-            : 3 // big key might be past spikes
+          ? hookshot ? 1 : 3 // big key might be past spikes
           : 0;
 
         min = entry
@@ -1194,7 +1163,7 @@ export const logic = {
       if (settings.keyMode == 1) {
         // KEY-SANITY LOGIC
 
-        boss = fightVit && bigKey ? (medallion == 1 ? (lamp ? 1 : 2) : medallion) : 0;
+        boss = fightVit && bigKey ? medallion == 1 ? lamp ? 1 : 2 : medallion : 0;
 
         max = entry
           ? 4 + //Bridge Chest, Spike Chest, Map Chest, Main Room
@@ -1215,7 +1184,12 @@ export const logic = {
 
         boss = fightVit ? (medallion == 1 ? (lamp ? 1 : 2) : medallion) : 0;
 
-        min = entry && medallion == 1 ? 1 + (spikeWalk ? 1 : 0) + (fire ? 2 : 0) + (lamp && somaria ? 1 : 0) : 0;
+        min = entry && medallion == 1
+          ? 1 +
+            (spikeWalk ? 1 : 0) +
+            (fire ? 2 : 0) +
+            (lamp && somaria ? 1 : 0)
+          : 0;
 
         max = entry && medallion !== 0 ? (fire || somaria ? 5 : 4) : 0;
       } else {
@@ -1223,7 +1197,7 @@ export const logic = {
 
         boss = fightVit ? (medallion == 1 ? (lamp ? 1 : 2) : medallion) : 0;
 
-        min = entry && medallion == 1 ? (fightVit && lamp ? 2 : firerod ? 1 : 0) : 0;
+        min = entry && medallion == 1 ? fightVit && lamp ? 2 : firerod ? 1 : 0 : 0;
 
         max = entry && medallion !== 0 ? 2 : 0;
       }
@@ -1245,39 +1219,39 @@ export const logic = {
       if (settings.keyMode == 1) {
         // KEY-SANITY LOGIC
 
-        boss = fightTri && bigKey && key >= 3 ? (medallion == 1 ? (key == 4 ? (light ? 1 : 2) : 3) : medallion) : 0;
+        boss = fightTri && bigKey && key >= 3 ? medallion == 1 ? key == 4 ? light ? 1 : 2 : 3 : medallion : 0;
 
-        min =
-          entry && light && 1 == medallion
-            ? 1 + // compass Chest
-              (firerod ? 2 : 0) + //Spike Roller Chests
-              (key >= 1 ? 1 : 0) + // chomp room
-              (key >= 2 ? 1 : 0) + // BK chest
-              (key >= 2 && bigKey ? 2 : 0) + //big chest and crystaroller chest
-              (key == 3 && bigKey ? -1 : 0) + // must leave 1 behind-- either BK chest or boss
-              (key >= 3 && bigKey && lamp && safety ? 4 : 0) + // laser bridge
-              (key >= 3 && firerod && bigKey && lamp && icerod ? 1 : 0) // boss
-            : 0;
+        min = entry && light && 1 == medallion
+          ? 1 + // compass Chest
+            (firerod ? 2 : 0) + //Spike Roller Chests
+            (key >= 1 ? 1 : 0) + // chomp room
+            (key >= 2 ? 1 : 0) + // BK chest
+            (key >= 2 && bigKey ? 2 : 0) + //big chest and crystaroller chest
+            (key == 3 && bigKey ? -1 : 0) + // must leave 1 behind-- either BK chest or boss
+            (key >= 3 && bigKey && lamp && safety ? 4 : 0) + // laser bridge
+            (key >= 3 && firerod && bigKey && lamp && icerod ? 1 : 0) // boss
+          : 0;
 
-        max =
-          entry && medallion !== 0
-            ? 1 + // compass Chest
-              (firerod ? 2 : 0) + // compass Chest
-              (key >= 1 ? 1 : 0) + // chomp room
-              (key >= 2 ? 1 : 0) + // BK chest
-              (key >= 2 && bigKey ? 5 : 0) + // crystaroller chest and laser bridge
-              (key >= 3 && bigKey ? 1 : 0) + // big chest
-              (key == 4 && firerod && bigKey && icerod ? 1 : 0) //boss
-            : 0;
+        max = entry && medallion !== 0
+          ? 1 + // compass Chest
+            (firerod ? 2 : 0) + // compass Chest
+            (key >= 1 ? 1 : 0) + // chomp room
+            (key >= 2 ? 1 : 0) + // BK chest
+            (key >= 2 && bigKey ? 5 : 0) + // crystaroller chest and laser bridge
+            (key >= 3 && bigKey ? 1 : 0) + // big chest
+            (key == 4 && firerod && bigKey && icerod ? 1 : 0) //boss
+          : 0;
       } else if (settings.keyMode == 2) {
         // RETRO LOGIC
 
         boss = fightTri ? (medallion == 1 ? (lamp ? 1 : 2) : medallion) : 0;
 
-        min =
-          entry && light && medallion == 1
-            ? 2 + (firerod ? 2 : 0) + (firerod && safety ? 4 : 0) + (firerod && safety && icerod ? 1 : 0)
-            : 0;
+        min = entry && light && medallion == 1
+          ? 2 +
+            (firerod ? 2 : 0) +
+            (firerod && safety ? 4 : 0) +
+            (firerod && safety && icerod ? 1 : 0)
+          : 0;
 
         max = entry && medallion !== 0 ? 8 + (firerod ? 1 : 0) : 0;
       } else {
@@ -1297,7 +1271,9 @@ export const logic = {
 
       var entry = logic.entry10(),
         bigKey = items.bigKey10.val,
-        canClimb = items.bow.val >= 2 && logic.fire() && (bigKey || settings.keyMode !== 1),
+        canClimb = items.bow.val >= 2 &&
+          logic.fire() &&
+          (bigKey || settings.keyMode !== 1),
         light = items.lamp.val,
         somaria = items.somaria.val,
         firerod = items.firerod.val,
@@ -1311,7 +1287,7 @@ export const logic = {
       if (settings.keyMode == 1) {
         // KEY-SANITY LOGIC
 
-        boss = entry && canClimb && hookshot && bigKey && key >= 1 ? (key == 4 ? (logic.DMlight() ? 1 : 2) : 3) : 0;
+        boss = entry && canClimb && hookshot && bigKey && key >= 1 ? key == 4 ? logic.DMlight() ? 1 : 2 : 3 : 0;
 
         max = entry
           ? 2 + //hope room
@@ -1335,64 +1311,90 @@ export const logic = {
             (key >= 3 && canClimb && hookshot ? 1 : 0)
           : 0;
 
-        min =
-          entry && logic.DMlight()
-            ? 2 + //hope room
-              (boots ? 1 : 0) + //torch
-              (hamHook ? 4 : 0) + //dark mag room
-              (somaria ? 1 : 0) + //tile room
-              (canClimb ? 2 : 0) + //helmasaur chests
-              (key >= 1 && canClimb ? 1 : 0) + //anti-fairy chest
-              (key >= 2 && canClimb && hookshot ? 1 : 0) + //Moldorm chest
-              //firesnake or map chest or randomizer room, depending on key use
-              (key >= 1 && hammer && hookshot ? 1 : 0) +
-              (key >= 2 && hammer && hookshot ? 1 : 0) +
-              (key >= 3 && hammer && hookshot ? 3 : 0) +
-              // Bob's chest, BK room chests
-              (key >= 3 && (hamHook || fireCane) ? 4 : 0) +
-              (key == 2 && ((!canClimb && fireCane) || (fireCane && !hammer) || (fireCane && !boots && !hookshot))
-                ? 4
-                : 0) +
-              (key == 1 && !canClimb && fireCane && !(hammer && hookshot) && !(hammer && boots) ? 4 : 0) +
-              //compass room
-              (key == 4 && fireCane ? 4 : 0) +
-              (key == 3 && fireCane && (!canClimb || !hamHook) ? 4 : 0) +
-              (key == 2 && ((!canClimb && fireCane) || (fireCane && !hammer) || (fireCane && !boots && !hookshot))
-                ? 4
-                : 0) +
-              (key == 1 && !canClimb && fireCane && !(hammer && hookshot) && !(hammer && boots) ? 4 : 0) +
-              //big chest
-              (key >= 3 && bigKey && (hamHook || fireCane) ? 1 : 0) +
-              (key == 2 && bigKey && fireCane && (!canClimb || !hamHook) ? 1 : 0) +
-              (key == 1 && bigKey && (!canClimb || hammer) && (canClimb || fireCane) && (canClimb || !hammer) ? 1 : 0) +
-              //map chest
-              (key == 2 && !canClimb && hammer && !hookshot && boots ? 1 : 0) +
-              (key >= 3 && hammer && (hookshot || boots) ? 1 : 0) +
-              (key == 1 && fireCane && (!canClimb || (hammer && boots && !hookshot)) ? 1 : 0) +
-              (key == 0 && canClimb && hamHook ? 2 : 0) + //firesnake or map chest or anti-fairy chest
-              (key == 0 && fireCane && !hamHook ? 1 : 0) //I DON'T KNOW
-            : 0;
+        min = entry && logic.DMlight()
+          ? 2 + //hope room
+            (boots ? 1 : 0) + //torch
+            (hamHook ? 4 : 0) + //dark mag room
+            (somaria ? 1 : 0) + //tile room
+            (canClimb ? 2 : 0) + //helmasaur chests
+            (key >= 1 && canClimb ? 1 : 0) + //anti-fairy chest
+            (key >= 2 && canClimb && hookshot ? 1 : 0) + //Moldorm chest
+            //firesnake or map chest or randomizer room, depending on key use
+            (key >= 1 && hammer && hookshot ? 1 : 0) +
+            (key >= 2 && hammer && hookshot ? 1 : 0) +
+            (key >= 3 && hammer && hookshot ? 3 : 0) +
+            // Bob's chest, BK room chests
+            (key >= 3 && (hamHook || fireCane) ? 4 : 0) +
+            (key == 2 &&
+                ((!canClimb && fireCane) ||
+                  (fireCane && !hammer) ||
+                  (fireCane && !boots && !hookshot))
+              ? 4
+              : 0) +
+            (key == 1 &&
+                !canClimb &&
+                fireCane &&
+                !(hammer && hookshot) &&
+                !(hammer && boots)
+              ? 4
+              : 0) +
+            //compass room
+            (key == 4 && fireCane ? 4 : 0) +
+            (key == 3 && fireCane && (!canClimb || !hamHook) ? 4 : 0) +
+            (key == 2 &&
+                ((!canClimb && fireCane) ||
+                  (fireCane && !hammer) ||
+                  (fireCane && !boots && !hookshot))
+              ? 4
+              : 0) +
+            (key == 1 &&
+                !canClimb &&
+                fireCane &&
+                !(hammer && hookshot) &&
+                !(hammer && boots)
+              ? 4
+              : 0) +
+            //big chest
+            (key >= 3 && bigKey && (hamHook || fireCane) ? 1 : 0) +
+            (key == 2 && bigKey && fireCane && (!canClimb || !hamHook) ? 1 : 0) +
+            (key == 1 &&
+                bigKey &&
+                (!canClimb || hammer) &&
+                (canClimb || fireCane) &&
+                (canClimb || !hammer)
+              ? 1
+              : 0) +
+            //map chest
+            (key == 2 && !canClimb && hammer && !hookshot && boots ? 1 : 0) +
+            (key >= 3 && hammer && (hookshot || boots) ? 1 : 0) +
+            (key == 1 &&
+                fireCane &&
+                (!canClimb || (hammer && boots && !hookshot))
+              ? 1
+              : 0) +
+            (key == 0 && canClimb && hamHook ? 2 : 0) + //firesnake or map chest or anti-fairy chest
+            (key == 0 && fireCane && !hamHook ? 1 : 0) //I DON'T KNOW
+          : 0;
       } else if (settings.keyMode == 2) {
         // RETRO LOGIC
 
-        boss = entry && canClimb && hookshot ? (hamHook && fireCane && boots ? (logic.DMlight() ? 1 : 2) : 3) : 0;
+        boss = entry && canClimb && hookshot ? hamHook && fireCane && boots ? logic.DMlight() ? 1 : 2 : 3 : 0;
 
-        min =
-          entry && logic.DMlight()
-            ? (canClimb && somaria && !firerod && hammer && !hookshot && !boots ? 1 : 0) +
-              (canClimb && somaria && firerod && hammer && hookshot && boots ? 4 : 0) +
-              (canClimb && !somaria && !hammer && hookshot && boots ? 1 : 0) +
-              (somaria && !firerod && hammer && !hookshot && boots ? 1 : 0) +
-              (somaria && firerod && hammer && !hookshot ? 4 : 0) +
-              (somaria && !firerod && hammer && hookshot ? 1 : 0) +
-              (canClimb && !somaria && !hookshot && boots ? 1 : 0) +
-              (canClimb && somaria && !firerod && !hammer ? 1 : 0) +
-              (somaria && hammer && !hookshot && boots ? 1 : 0) +
-              (somaria && firerod && !hammer ? 4 : 0) +
-              (boots && (somaria || hammer) ? 1 : 0) +
-              (hammer && hookshot ? 14 : 0) +
-              (somaria && firerod ? 5 : 0)
-            : 0;
+        min = entry && logic.DMlight()
+          ? (canClimb && somaria && !firerod && hammer && !hookshot && !boots ? 1 : 0) +
+            (canClimb && somaria && firerod && hammer && hookshot && boots ? 4 : 0) +
+            (canClimb && !somaria && !hammer && hookshot && boots ? 1 : 0) +
+            (somaria && !firerod && hammer && !hookshot && boots ? 1 : 0) +
+            (somaria && firerod && hammer && !hookshot ? 4 : 0) +
+            (somaria && !firerod && hammer && hookshot ? 1 : 0) +
+            (canClimb && !somaria && !hookshot && boots ? 1 : 0) +
+            (canClimb && somaria && !firerod && !hammer ? 1 : 0) +
+            (somaria && hammer && !hookshot && boots ? 1 : 0) +
+            (somaria && firerod && !hammer ? 4 : 0) +
+            (boots && (somaria || hammer) ? 1 : 0) +
+            (hammer && hookshot ? 14 : 0) +
+            (somaria && firerod ? 5 : 0)
+          : 0;
 
         max = entry
           ? 2 +
@@ -1415,7 +1417,7 @@ export const logic = {
       } else {
         // REGULAR LOGIC
 
-        boss = entry && canClimb && hookshot ? (hamHook && fireCane && boots ? (logic.DMlight() ? 1 : 2) : 3) : 0;
+        boss = entry && canClimb && hookshot ? hamHook && fireCane && boots ? logic.DMlight() ? 1 : 2 : 3 : 0;
 
         min = entry
           ? (somaria && firerod && hammer && hookshot ? 3 : 0) +
@@ -1485,11 +1487,11 @@ export const logic = {
               (logic.entry1() ? 1 : 0) -
               (logic.entry2() ? 1 : 0) -
               (logic.entry3() ? 6 : 0) -
-              (logic.entry4() ? 1 : 0)
+              (logic.entry4() ? 1 : 0),
           );
           maxKey -= settings.openMode == 0 ? 1 : 0;
 
-          boss = entry && maxKey >= 2 && sword ? (minKey >= 2 ? (light ? 1 : 2) : 3) : 0;
+          boss = entry && maxKey >= 2 && sword ? minKey >= 2 ? light ? 1 : 2 : 3 : 0;
 
           max = entry ? (maxKey >= 1 ? 2 : 1) : 0;
 
@@ -1606,8 +1608,13 @@ export const logic = {
 
       for (let chest = 1; chest <= total; chest++) {
         //colours each chest pip based on amount opened and max/min
-        const pipStatus =
-          chest > total - opened ? 'null' : chest > total - dStatus.min ? 1 : chest > total - dStatus.max ? 3 : 0;
+        const pipStatus = chest > total - opened
+          ? 'null'
+          : chest > total - dStatus.min
+          ? 1
+          : chest > total - dStatus.max
+          ? 3
+          : 0;
 
         logic.colour('#chestPip' + id + '-' + chest, pipStatus);
       }
