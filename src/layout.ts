@@ -1,5 +1,5 @@
-import { logic } from './logic.js';
-import { dungeons, map } from './trackables.js';
+import { logic } from './logic';
+import { dungeons, map } from './trackables';
 
 export function popout() {
   console.log($('#totalCover').width());

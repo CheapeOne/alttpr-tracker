@@ -1,7 +1,7 @@
-import { layout, settings } from './layout.js';
-import { loadState } from './state.js';
-import { stats } from './stats.js';
-import { map, toggle } from './trackables.js';
+import { layout, settings } from './layout';
+import { loadState } from './state';
+import { stats } from './stats';
+import { map, toggle } from './trackables';
 
 // TODO:
 // - add onclick handlers to window somewhere (here?)

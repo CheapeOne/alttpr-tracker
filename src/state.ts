@@ -1,4 +1,4 @@
-import { items, chests, dungeons, keyShops, setTrackables } from './trackables.js';
+import { items, chests, dungeons, keyShops, setTrackables } from './trackables';
 
 /**
  * Save and load the state of the tracker with local storage.
@@ -88,7 +88,7 @@ export function resetState() {
 }
 
 export function showResetModal() {
-  const resetPrompt = /** @type {HTMLDialogElement} */ (document.getElementById('resetPrompt'));
+  const resetPrompt = /** @type {HTMLDialogElement} */ document.getElementById('resetPrompt');
   resetPrompt.showModal();
 }
 
