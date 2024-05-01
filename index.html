@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>LTTP Randomizer Tracker</title>
+	<link rel="manifest" href="manifest.json" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald" >
+	<link rel="stylesheet" href="style.css" type="text/css" >
+	<link rel="icon" type="image/x-icon" href="/favicon.svg">
+  <script type="module" crossorigin src="/assets/index-Cl8_WToP.js"></script>
+</head>
+
+<body>
+	<div id="totalCover"></div>
+
+	<div id="trackerBox">
+		<div class="tracker" id="items">
+			<div class="trackerTitle"></div>
+
+			<div class="icon state0" id="bow" title="Bow" onclick="toggle.icon(this)"></div>
+			<div class="icon state0" id="boomerang" title="Boomerang" onclick="toggle.icon(this)"></div>
+			<div class="icon state0" id="hookshot" title="Hookshot" onclick="toggle.icon(this)"></div>
+			<div class="icon state1 showCombined" id="bomb" title="Bombs" onclick="toggle.icon(this)"></div>
+			<div class="icon state0 hideCombined" id="mushroom" title="Mushroom" onclick="toggle.icon(this)"></div>
+			<div class="icon state0 hideCombined" id="powder" title="Powder" onclick="toggle.icon(this)"></div>
+			<div class="icon state0 showCombined" id="mushroompowder" title="Mushroom & Powder" onclick="toggle.icon(this)"></div>
+
+			<div class="icon state0" id="firerod" title="Fire Rod" onclick="toggle.icon(this)"></div>
+			<div class="icon state0" id="icerod" title="Ice Rod" onclick="toggle.icon(this)"></div>
+			<div class="icon state0" id="bombos" title="Bombos Medallion" onclick="toggle.icon(this)"></div>
+			<div class="icon state0" id="ether" title="Ether Medallion" onclick="toggle.icon(this)"></div>
+			<div class="icon state0" id="quake" title="Quake Medallion" onclick="toggle.icon(this)"></div>
+
+			<div class="icon state0" id="lamp" title="Lamp" onclick="toggle.icon(this)"></div>
+			<div class="icon state0" id="hammer" title="Hammer" onclick="toggle.icon(this)"></div>
+			<div class="icon state0 hideCombined" id="flute" title="Flute" onclick="toggle.icon(this)"></div>
+			<div class="icon state0 hideCombined" id="shovel" title="Shovel" onclick="toggle.icon(this)"></div>
+			<div class="icon state0 showCombined" id="shovelflute" title="Shovel & Flute" onclick="toggle.icon(this)"></div>
+			<div class="icon state0 showCombined" id="net" title="Bug Net" onclick="toggle.icon(this)"></div>
+			<div class="icon state0" id="book" title="Book of Mudora" onclick="toggle.icon(this)"></div>
+
+			<div class="icon state0" id="bottle" title="Bottles" onclick="toggle.icon(this)"></div>
+			<div class="icon state0" id="somaria" title="Cane of Somaria" onclick="toggle.icon(this)"></div>
+			<div class="icon state0" id="byrna" title="Cane of Byrna" onclick="toggle.icon(this)"></div>
+			<div class="icon state0" id="cape" title="Cape" onclick="toggle.icon(this)"></div>
+			<div class="icon state0" id="mirror" title="Mirror" onclick="toggle.icon(this)"></div>
+		</div>
+		<div class="tracker" id="gear">
+			<div class="trackerTitle"></div>
+
+			<div class="icon state0" id="sword" title="Sword" onclick="toggle.icon(this)"></div>
+			<div class="icon state0" id="shield" title="Shield" onclick="toggle.icon(this)"></div>
+			<div class="icon state0" id="mail" title="Mail" onclick="toggle.icon(this)"></div>
+			<div class="icon state0" id="pearl" title="Moon Pearl" onclick="toggle.icon(this)"></div>
+			<div class="icon state0" id="boots" title="Pegasus Boots" onclick="toggle.icon(this)"></div>
+			<div class="icon state0" id="glove" title="Power Glove & Titan's Mitt" onclick="toggle.icon(this)"></div>
+			<div class="icon state0" id="flippers" title="Flippers" onclick="toggle.icon(this)"></div>
+			<div class="icon state0" id="halfmagic" title="Half Magic Upgrade" onclick="toggle.icon(this)"></div>
+		</div>
+		<div class="tracker" id="dungeons">
+			<div class="trackerTitle"></div>
+
+			<div class="icon stuff0 state0 dispHeads" id="boss0" title="Armos Knights" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff1 state0 dispHeads" id="boss1" title="Lanmolas" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff2 state0 dispHeads" id="boss2" title="Moldorm" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff3 state0 dispHeads" id="boss3" title="Helmasaur" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff4 state0 dispHeads" id="boss4" title="Arrghus" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff5 state0 dispHeads" id="boss5" title="Mothula" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff6 state0 dispHeads" id="boss6" title="Blind" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff7 state0 dispHeads" id="boss7" title="Kholdstare" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff8 state0 dispHeads" id="boss8" title="Vitreous" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff9 state0 dispHeads" id="boss9" title="Trinexx" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff10 state0" id="boss10" title="Ganon's Tower" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff11 state0" id="boss11" title="Agahnim" onclick="toggle.icon(this)"></div>
+
+			<div class="icon stuff0 prize state0 dispHeads" id="prize0" title="Eastern Palace Prize" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff1 prize state0 dispHeads" id="prize1" title="Desert Palace Prize" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff2 prize state0 dispHeads" id="prize2" title="Tower of Hera Prize" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff3 prize state0 dispHeads" id="prize3" title="Palace of Darkness Prize" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff4 prize state0 dispHeads" id="prize4" title="Swamp Palace Prize" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff5 prize state0 dispHeads" id="prize5" title="Skull Woods Prize" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff6 prize state0 dispHeads" id="prize6" title="Thieves Town Prize" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff7 prize state0 dispHeads" id="prize7" title="Ice Palace Prize" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff8 prize state0 dispHeads" id="prize8" title="Misery Mire Prize" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff9 prize state0 dispHeads" id="prize9" title="Turtle Rock Prize" onclick="toggle.icon(this)"></div>
+
+			<div class="icon stuff0 state0 bigPrize dispPrizes" id="bigPrize0" title="Eastern Palace Prize" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff1 state0 bigPrize dispPrizes" id="bigPrize1" title="Desert Palace Prize" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff2 state0 bigPrize dispPrizes" id="bigPrize2" title="Tower of Hera Prize" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff3 state0 bigPrize dispPrizes" id="bigPrize3" title="Palace of Darkness Prize" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff4 state0 bigPrize dispPrizes" id="bigPrize4" title="Swamp Palace Prize" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff5 state0 bigPrize dispPrizes" id="bigPrize5" title="Skull Woods Prize" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff6 state0 bigPrize dispPrizes" id="bigPrize6" title="Thieves Town Prize" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff7 state0 bigPrize dispPrizes" id="bigPrize7" title="Ice Palace Prize" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff8 state0 bigPrize dispPrizes" id="bigPrize8" title="Misery Mire Prize" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff9 state0 bigPrize dispPrizes" id="bigPrize9" title="Turtle Rock Prize" onclick="toggle.icon(this)"></div>
+
+			<div class="icon stuff0 abbr dispPrizes" id="abbr0" title="Eastern Palace" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff1 abbr dispPrizes" id="abbr1" title="Desert Palace" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff2 abbr dispPrizes" id="abbr2" title="Tower of Hera" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff3 abbr dispPrizes" id="abbr3" title="Palace of Darkness" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff4 abbr dispPrizes" id="abbr4" title="Swamp Palace" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff5 abbr dispPrizes" id="abbr5" title="Skull Woods" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff6 abbr dispPrizes" id="abbr6" title="Thieves Town" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff7 abbr dispPrizes" id="abbr7" title="Ice Palace" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff8 abbr dispPrizes" id="abbr8" title="Misery Mire" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff9 abbr dispPrizes" id="abbr9" title="Turtle Rock" onclick="toggle.icon(this)"></div>
+
+			<div class="icon stuff8 medal state0" id="medal8" title="Misery Mire Entry Medallion" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff9 medal state0" id="medal9" title="Turtle Rock Entry Medallion" onclick="toggle.icon(this)"></div>
+
+			<div class="icon stuff1 key state0" id="key1" title="Desert Palace Key" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff2 key state0" id="key2" title="Tower of Hera Key" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff3 key state0" id="key3" title="Palace of Darkness Keys" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff4 key state0" id="key4" title="Swamp Palace Key" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff5 key state0" id="key5" title="Skull Woods Keys" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff6 key state0" id="key6" title="Thieves Town Key" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff7 key state0" id="key7" title="Ice Palace Keys" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff8 key state0" id="key8" title="Misery Mire Keys" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff9 key state0" id="key9" title="Turtle Rock Keys" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff10 key state0" id="key10" title="Ganon's Tower Keys" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff11 key state0" id="key11" title="Castle Tower Keys" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff11 key state0" id="key12" title="Hyrule Castle Key" onclick="toggle.icon(this)"></div>
+
+			<div class="icon stuff0 bigKey state0" id="bigKey0" title="Eastern Palace Big Key" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff1 bigKey state0" id="bigKey1" title="Desert Palace Big Key" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff2 bigKey state0" id="bigKey2" title="Tower of Hera Big Key" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff3 bigKey state0" id="bigKey3" title="Palace of Darkness Big Key" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff4 bigKey state0" id="bigKey4" title="Swamp Palace Big Key" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff5 bigKey state0" id="bigKey5" title="Skull Woods Big Key" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff6 bigKey state0" id="bigKey6" title="Thieves Town Big Key" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff7 bigKey state0" id="bigKey7" title="Ice Palace Big Key" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff8 bigKey state0" id="bigKey8" title="Misery Mire Big Key" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff9 bigKey state0" id="bigKey9" title="Turtle Rock Big Key" onclick="toggle.icon(this)"></div>
+			<div class="icon stuff10 bigKey state0" id="bigKey10" title="Ganon's Tower Big Key" onclick="toggle.icon(this)"></div>
+
+			<div class="icon key state0" id="keyAny" title="General-Use Key" onclick="toggle.icon(this)"></div>
+		</div>
+
+		<div class="tracker" id="timer" onclick="toggleTimer()">
+			<div class="trackerTitle"></div>
+			<div id="timerWrap">
+				<div class="timerDigit" id="digit1">
+					<span class="digits">0
+						<br/>1
+						<br/>2
+						<br/>3
+						<br/>4
+						<br/>5
+						<br/>6
+						<br/>7
+						<br/>8
+						<br/>9
+						<br/>0</span>
+				</div>
+
+				<div class="colon" id="colon7" style="left:50px">:</div>
+
+				<div class="timerDigit" id="digit2">
+					<span class="digits">0
+						<br/>1
+						<br/>2
+						<br/>3
+						<br/>4
+						<br/>5
+						<br/>6
+						<br/>7
+						<br/>8
+						<br/>9
+						<br/>0</span>
+				</div>
+
+				<div class="timerDigit" id="digit3">
+					<span class="digits">0
+						<br/>1
+						<br/>2
+						<br/>3
+						<br/>4
+						<br/>5
+						<br/>6
+						<br/>7
+						<br/>8
+						<br/>9
+						<br/>0</span>
+				</div>
+
+				<div class="colon" id="colon5" style="left:150px">:</div>
+
+				<div class="timerDigit" id="digit4">
+					<span class="digits">0
+						<br/>1
+						<br/>2
+						<br/>3
+						<br/>4
+						<br/>5
+						<br/>0</span>
+				</div>
+
+				<div class="timerDigit" id="digit5">
+					<span class="digits">0
+						<br/>1
+						<br/>2
+						<br/>3
+						<br/>4
+						<br/>5
+						<br/>6
+						<br/>7
+						<br/>8
+						<br/>9
+						<br/>0</span>
+				</div>
+
+				<div class="colon" style="left:250px;top:-4px">.</div>
+
+				<div class="timerDigit" id="digit6">
+					<span class="digits">0
+						<br/>1
+						<br/>2
+						<br/>3
+						<br/>4
+						<br/>5
+						<br/>0</span>
+				</div>
+
+				<div class="timerDigit" id="digit7">
+					<span class="digits">0
+						<br/>1
+						<br/>2
+						<br/>3
+						<br/>4
+						<br/>5
+						<br/>6
+						<br/>7
+						<br/>8
+						<br/>9
+						<br/>0</span>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+	</div>
+
+	<div id="mapBox">
+		<div class="map" id="mapLW"></div>
+		<div class="map" id="mapDW"></div>
+	</div>
+
+	<dialog id="resetPrompt">
+		<p>Reset all of your progress?</p>
+		<form method="dialog">
+			<button style="color:red" onclick="resetState()">Reset</button>
+			<button type="submit">Cancel</button>
+		</form>
+	</dialog>
+
+	<div id="settingsTab">
+		<div class="tabIcon" onclick="settings.toggle()">&#9776;</div>
+		<div class="tabIcon" style="left:40px" onclick="popout()"> &#8663;</div>
+		<div id="resetButton" class="tabIcon" style="left:74px" onclick="showResetModal()"> &#8634;</div>
+
+		<div id="caption"></div>
+
+		<div class="selection" style="top: 40px;left:50px;">
+			<b>&nbsp;VARIATION</b>
+			<br/>
+			<input title="No Variation" class="radio regMode" type="radio" name="keyMode" value="0" onclick="settings.apply(true)" checked>
+			<span class="radio regMode"> Regular</span>
+			<br/>
+			<input title="Key-Sanity Mode" class="radio keysanity" type="radio" name="keyMode" value="1" onclick="settings.apply(true)">
+			<span class="radio keysanity"> Key-Sanity</span>
+			<br/>
+			<input title="Retro Mode" class="radio retro" type="radio" name="keyMode" value="2" onclick="settings.apply(true)">
+			<span class="radio retro"> Retro</span>
+		</div>
+
+		<div class="selection" style="top:40px;left:170px;">
+			<b>&nbsp;LAYOUT</b>
+			<br/>
+			<input title="A Square-ish Layout" class="radio Square" type="radio" name="layout" value="0" onclick="settings.apply(false)"
+			 checked>
+			<span class="radio Square"> Square</span>
+			<br/>
+			<input title="Dungeon Icons Arranged by Location" class="radio Geo" type="radio" name="layout" value="1" onclick="settings.apply(false)">
+			<span class="radio Geo"> Geographic</span>
+			<br/>
+			<input title="A Tall, Narrow Layout" class="radio Tall" type="radio" name="layout" value="2" onclick="settings.apply(false)">
+			<span class="radio Tall"> Tall</span>
+			<br/>
+			<input title="A Short, Wide Layout" class="radio Wide" type="radio" name="layout" value="3" onclick="settings.apply(false)">
+			<span class="radio Wide"> Wide</span>
+			<br/>
+			<input title="A condensed layout" class="radio AIO" type="radio" name="layout" value="4" onclick="settings.apply(false)">
+			<span class="radio AIO"> All-in-One</span>
+		</div>
+
+		<div class="selection" style="top: 40px;left:290px">
+			<b>&nbsp;BORDERS</b>
+			<br/>
+			<input title="No Borders (most compact)" class="radio noBorder" type="radio" name="border" value="0" onclick="settings.apply(false)">
+			<span class="radio noBorder"> Off</span>
+			<br/>
+			<input title="Simple White Borders" class="radio simpBorder" type="radio" name="border" value="1" onclick="settings.apply(false)">
+			<span class="radio simpBorder"> Simple</span>
+			<br/>
+			<input title="Inventory-Style Borders" class="radio invBorder" type="radio" name="border" value="2" onclick="settings.apply(false)"
+			 checked>
+			<span class="radio retroBorder"> Inventory</span>
+			<br/>
+			<input title="Textbox-Style Borders" class="radio textBorder" type="radio" name="border" value="3" onclick="settings.apply(false)">
+			<span class="radio textBorder"> Textbox</span>
+			<br/>
+			<input title="Thinner Pixel Borders" class="radio thinBorder" type="radio" name="border" value="4" onclick="settings.apply(false)">
+			<span class="radio thinBorder"> Thin</span>
+		</div>
+
+		<div class="selection" style="top: 40px;left:410px">
+			<b>&nbsp;COMBINE
+				<br/>&nbsp;FETCH ITEMS</b>
+			<br/>
+			<input title="Combine Mushroom/Powder & Shovel/Flute" class="radio combine" type="radio" name="combineFetch" value="0" onclick="settings.apply(false)"
+			 checked>
+			<span class="radio combine"> Yes</span>
+			<br/>
+			<input title="Separate Mushroom/Powder & Shovel/Flute" class="radio dontCombine" type="radio" name="combineFetch" value="1"
+			 onclick="settings.apply(false)">
+			<span class="radio dontCombine"> No</span>
+			<br/>
+		</div>
+
+		<div class="selection" style="top: 40px;left:530px">
+			<b>&nbsp;TIMER
+				<br/>
+				<input title="No Timer" class="radio timerOff" type="radio" name="timerMode" value="0" onclick="settings.apply(false)" checked>
+				<span class="radio timerOff"> Off</span>
+				<br/>
+				<input title="Timer On (click to start/pause, right-click to reset)" class="radio timerOn" type="radio" name="timerMode"
+				 value="1" onclick="settings.apply(false)">
+				<span class="radio timerOn"> On</span>
+				<br/>
+		</div>
+
+
+		<div class="selection" style="top:150px;left:50px">
+			<b>&nbsp;STATE</b>
+			<br/>
+			<input title="Standard Mode" class="radio icon0" type="radio" name="openMode" value="0" onclick="settings.apply(false)" checked>
+			<span class="radio icon0"> Standard</span>
+			<br/>
+			<input title="Open Mode" class="radio icon1" type="radio" name="openMode" value="1" onclick="settings.apply(false)">
+			<span class="radio icon1"> Open</span>
+		</div>
+
+		<div class="selection" style="top:170px;left:170px">
+			<b>&nbsp;ICONS</b>
+			<br/>
+			<input title="In-World Style Icons" class="radio icon0" type="radio" name="iconSet" value="0" onclick="settings.apply(false)">
+			<span class="radio icon0"> In-World</span>
+			<br/>
+			<input title="Inventory Screen Style Icons" class="radio icon1" type="radio" name="iconSet" value="1" onclick="settings.apply(false)"
+			 checked>
+			<span class="radio icon1"> Inventory</span>
+		</div>
+
+		<div class="selection" style="top: 170px;left:290px">
+			<b>&nbsp;DUNGEONS</b>
+			<br/>
+			<input title="Boss Head Icons (click ? to change prize, click head to mark complete)" class="radio dungeonDispHeads" type="radio"
+			 name="dungeonDisp" value="0" onclick="settings.apply(false)" checked>
+			<span class="radio dungeonDispHeads"> Boss Heads</span>
+			<br/>
+			<input title="Prize Icons (click ? to change prize, click initials to mark complete)" class="radio dungeonDispPrizes" type="radio"
+			 name="dungeonDisp" value="1" onclick="settings.apply(false)">
+			<span class="radio dungeonDispPrizes"> Prizes</span>
+		</div>
+
+		<div class="selection" style="top: 150px;left:410px">
+			<b>&nbsp;MAPS</b>
+			<br/>
+			<input title="No Map" class="radio mapOff" type="radio" name="mapAlign" value="0" onclick="settings.apply(false)">
+			<span class="radio mapOff"> Off</span>
+			<br/>
+			<input title="Vertical Maps" class="radio mapV" type="radio" name="mapAlign" value="1" onclick="settings.apply(false)" checked>
+			<span class="radio mapV"> Vertical</span>
+			<br/>
+			<input title="Horizontal Maps" class="radio mapH" type="radio" name="mapAlign" value="2" onclick="settings.apply(false)">
+			<span class="radio mapH"> Horizontal</span>
+		</div>
+
+		<div class="selection" style="top: 130px;left:530px">
+			<b>&nbsp;LOCATION
+				<br/>&nbsp;PREDICTOR
+				<br/>
+				<input title="No Predictions" class="radio predictOff" type="radio" name="predictor" value="0" onclick="settings.apply(false)"
+				 checked>
+				<span class="radio predictOff"> Off</span>
+				<br/>
+				<input title="Predict for Accessible Locations" class="radio predictAccess" type="radio" name="predictor" value="1" onclick="settings.apply(false)">
+				<span class="radio predictAccess"> Accessible Only</span>
+				<br/>
+				<input title="Predict for All Locations" class="radio predictAll" type="radio" name="predictor" value="2" onclick="settings.apply(false)">
+				<span class="radio predictAll"> All</span>
+		</div>
+
+	</div>
+
+	<!-- Libs -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenMax.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/utils/Draggable.min.js"></script>
+	<script src="https://code.createjs.com/soundjs-0.6.1.min.js"></script>
+	<script src="https://code.createjs.com/preloadjs-0.6.1.min.js"></script>
+	<script src="/lib/moment.js"></script>
+
+	<!-- Src -->
+</body>
+
+</html>
