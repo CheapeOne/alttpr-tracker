@@ -9,7 +9,7 @@ This tracker was forked from [ItsSupercar/alttpr-Tracker](https://github.com/Its
 
 Development:
 
-Added build step to minify code and migrate to typescript. Redeveloped to use [deno](https://deno.com/) and [vite](https://vitejs.dev/).
+Added build step to minify code and migrate to typescript. Redeveloped to use [deno](https://deno.com/) and [vite](https://vitejs.dev/). See `deno.json` for local dev, build, and deploy scripts.
 
 
 The following is the original readme.
