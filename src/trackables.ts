@@ -1,5 +1,5 @@
-import { logic } from './logic.js';
-import { settings } from './layout.js';
+import { logic } from './logic.ts';
+import { settings } from './layout.ts';
 
 export let items = {
   //a list of everything we're tracking-- includes all inventory items and also some other variables

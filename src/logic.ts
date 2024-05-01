@@ -1,6 +1,6 @@
-import { settings } from './layout.js';
-import { stats } from './stats.js';
-import { items, dungeons, chests, keyShops } from './trackables.js';
+import { settings } from './layout';
+import { stats } from './stats';
+import { items, dungeons, chests, keyShops } from './trackables';
 
 // Temp file level variables.
 // TODO: clean up and use local vars instead.

@@ -1,6 +1,6 @@
-import { settings } from './layout.js';
-import { logic } from './logic.js';
-import { items, dungeons, chests } from './trackables.js';
+import { settings } from './layout';
+import { logic } from './logic';
+import { items, dungeons, chests } from './trackables';
 
 export const statsTable = {};
 
