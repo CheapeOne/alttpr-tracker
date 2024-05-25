@@ -8,19 +8,19 @@
   "description": "Item tracker for the LTTP Randomizer",
   "icons": [
     {
-      "src": "manifest/icon256.png",
+      "src": "./icon256.png",
       "sizes": "256x256",
       "type": "image/png"
     },
     {
-      "src": "manifest/icon512.png",
+      "src": "./icon512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
   ],
   "screenshots": [
     {
-      "src": "manifest/screenshot1.png",
+      "src": "./screenshot1.png",
       "sizes": "3302 × 2240",
       "type": "image/png",
       "form_factor": "wide",

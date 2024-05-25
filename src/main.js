@@ -1,7 +1,8 @@
 import { layout, settings } from './layout.js';
-import { loadState } from './state.js';
+import { loadState, saveState, resetState, showResetModal } from './state.js';
 import { stats } from './stats.js';
 import { map, toggle } from './trackables.js';
+import './timer.js';
 
 // TODO:
 // - add onclick handlers to window somewhere (here?)
@@ -61,6 +62,20 @@ function main() {
     if (event.which == 3) {
       resetTimer();
     }
+  });
+
+  $('#trackerBox').click((e) => {
+    toggle.icon(e.target);
+  });
+
+  $('#resetButton').click(() => {
+    showResetModal();
+  });
+
+  window.addEventListener('beforeunload', saveState);
+  $('#resetConfirm').click(() => {
+    window.removeEventListener('beforeunload', saveState);
+    resetState();
   });
 }
 

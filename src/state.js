@@ -7,7 +7,31 @@ import { items, chests, dungeons, keyShops, setTrackables } from './trackables.j
 const TRACKABLES_KEY = 'trackables';
 const STYLES_KEY = 'styles';
 
-function _saveTrackables() {
+/**
+ * Save settings to local storage
+ */
+export function saveState() {
+  saveTrackables();
+  saveStyles();
+}
+
+export function loadState() {
+  loadTrackables();
+  loadStyles();
+}
+
+export function resetState() {
+  window.localStorage.removeItem(TRACKABLES_KEY);
+  window.localStorage.removeItem(STYLES_KEY);
+  window.location.reload();
+}
+
+export function showResetModal() {
+  const resetPrompt = /** @type {HTMLDialogElement} */ (document.getElementById('resetPrompt'));
+  resetPrompt.showModal();
+}
+
+function saveTrackables() {
   const trackables = {
     items: items,
     chests: chests,
@@ -18,7 +42,7 @@ function _saveTrackables() {
   window.localStorage.setItem(TRACKABLES_KEY, JSON.stringify(trackables));
 }
 
-function _saveStyles() {
+function saveStyles() {
   const groups = ['#items > div', '#gear > div', '#dungeons > div', '#mapLW > div', '#mapDW > div'];
   const selector = groups.join(', ');
   const styledDivs = $(selector)
@@ -38,15 +62,7 @@ function _saveStyles() {
   window.localStorage.setItem(STYLES_KEY, JSON.stringify(styles));
 }
 
-/**
- * Save settings to local storage
- */
-function saveState() {
-  _saveTrackables();
-  _saveStyles();
-}
-
-function _loadStyle(style) {
+function loadStyle(style) {
   const results = $('#' + style.id);
   if (!results || !results.length) {
     return;
@@ -57,43 +73,16 @@ function _loadStyle(style) {
   div.style.cssText = style.style;
 }
 
-function _loadStyles() {
+function loadStyles() {
   const styles = JSON.parse(window.localStorage.getItem(STYLES_KEY));
   if (styles) {
-    styles.forEach(_loadStyle);
+    styles.forEach(loadStyle);
   }
 }
 
-function _loadTrackables() {
+function loadTrackables() {
   const trackables = JSON.parse(window.localStorage.getItem(TRACKABLES_KEY));
   if (trackables) {
     setTrackables(trackables);
-    // items = trackables.items;
-    // chests = trackables.chests;
-    // dungeons = trackables.dungeons;
-    // keyShops = trackables.keyShops;
   }
 }
-
-export function loadState() {
-  _loadTrackables();
-  _loadStyles();
-}
-
-export function resetState() {
-  window.localStorage.removeItem(TRACKABLES_KEY);
-  window.localStorage.removeItem(STYLES_KEY);
-  window.removeEventListener('beforeunload', saveState);
-  window.location.reload();
-}
-
-export function showResetModal() {
-  const resetPrompt = /** @type {HTMLDialogElement} */ (document.getElementById('resetPrompt'));
-  resetPrompt.showModal();
-}
-
-function init() {
-  window.addEventListener('beforeunload', saveState);
-}
-
-init();

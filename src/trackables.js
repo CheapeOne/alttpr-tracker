@@ -339,56 +339,48 @@ export let keyShops = {
 
 export const map = {
   populate: function () {
-    $.each(chests, function (id, chest) {
-      //places all the chest icons onto the map
-      $('#map' + chest.world).append(
-        '<div class=chest onclick=toggle.chest(' +
-          id +
-          ') id=chest' +
-          id +
-          ' style=left:' +
-          chest.xPos +
-          '%;top:' +
-          chest.yPos +
-          '%;z-index:' +
-          (1000 - id) +
-          '>' +
-          (chest.amount > 1 ? chest.amount : '') +
-          '</div>'
-      );
-    });
+    //places all the chest icons onto the map
+    for (const [id, chest] of Object.entries(chests)) {
+      const div = document.createElement('div');
+      div.className = 'chest';
+      div.onclick = () => {
+        toggle.chest(id);
+      };
+      div.id = 'chest' + id;
+      div.style.left = chest.xPos + '%';
+      div.style.top = chest.yPos + '%';
+      div.style.zIndex = String(1000 - Number(id));
+      div.textContent = chest.amount > 1 ? String(chest.amount) : '';
 
-    $.each(dungeons, function (id, dungeon) {
-      //places all the dungeon icons onto the map
-      $('#map' + dungeon.world).append(
-        '<div class=dungeon onclick=toggle.boss(' +
-          id +
-          ') id=dungeon' +
-          id +
-          ' style=left:' +
-          dungeon.xPos +
-          '%;top:' +
-          dungeon.yPos +
-          '%;z-index:' +
-          (1100 - id) +
-          '></div>'
-      );
-      $('#map' + dungeon.world).append(
-        "<div class='chest dungeonChest' onclick=toggle.dungeonChest(" +
-          id +
-          ') id=dungeonChest' +
-          id +
-          ' style=left:' +
-          dungeon.xPos +
-          '%;top:' +
-          dungeon.yPos +
-          '%;z-index:' +
-          (1200 - id) +
-          '>' +
-          dungeon['chests' + settings.keyMode] +
-          '</div>'
-      );
-    });
+      document.getElementById('map' + chest.world).appendChild(div);
+    }
+
+    for (const [id, dungeon] of Object.entries(dungeons)) {
+      const div = document.createElement('div');
+      div.className = 'dungeon';
+      div.onclick = function () {
+        toggle.boss(id);
+      };
+      div.id = 'dungeon' + id;
+      div.style.left = dungeon.xPos + '%';
+      div.style.top = dungeon.yPos + '%';
+      div.style.zIndex = String(1100 - Number(id));
+
+      document.getElementById('map' + dungeon.world).appendChild(div);
+
+      let div2 = document.createElement('div');
+      div2.className = 'chest dungeonChest';
+      div2.onclick = function () {
+        toggle.dungeonChest(id);
+      };
+      div2.id = 'dungeonChest' + id;
+      div2.style.left = dungeon.xPos + '%';
+      div2.style.top = dungeon.yPos + '%';
+      div2.style.zIndex = String(1200 - Number(id));
+      div2.textContent = dungeon['chests' + settings.keyMode];
+
+      document.getElementById('map' + dungeon.world).appendChild(div2);
+    }
 
     $('.dungeonChest').mousedown(function (event) {
       //adds right-click functionality to dungeon chest counters
@@ -400,22 +392,20 @@ export const map = {
     $('#dungeon10').css({ 'background-image': 'none' }).html('GT'); //replaces prize icons with text for these dungeons
     $('#dungeon11').css({ 'background-image': 'none' }).html('AGA');
 
-    $.each(keyShops, function (id, shop) {
-      //places all the shops onto the map (only matters in Retro mode)
-      $('#map' + shop.world).append(
-        '<div class=keyShop onclick=toggle.keyShop(' +
-          id +
-          ') id=keyShop' +
-          id +
-          ' style=left:' +
-          shop.xPos +
-          '%;top:' +
-          shop.yPos +
-          '%;z-index:' +
-          (1000 - id) +
-          '>F<div class=keyCirc></div></div>'
-      );
-    });
+    for (const [id, keyShop] of Object.entries(keyShops)) {
+      const div = document.createElement('div');
+      div.className = 'keyShop';
+      div.onclick = () => {
+        toggle.keyShop(id);
+      };
+      div.id = 'keyShop' + id;
+      div.style.left = keyShop.xPos + '%';
+      div.style.top = keyShop.yPos + '%';
+      div.style.zIndex = String(1000 - Number(id));
+      div.innerHTML = '<div class=keyCirc></div>';
+
+      document.getElementById('map' + keyShop.world).appendChild(div);
+    }
 
     map.placeMiniChests(); //places the proper amount of pips for each dungeon's chests, depending on mode
 
