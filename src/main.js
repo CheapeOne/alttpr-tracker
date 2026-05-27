@@ -1,4 +1,4 @@
-import { layout, settings } from './layout.js';
+import { layout, settings, popout } from './layout.js';
 import { loadState, saveState, resetState, showResetModal } from './state.js';
 import { stats } from './stats.js';
 import { map, toggle } from './trackables.js';
@@ -12,6 +12,10 @@ import './timer.js';
 // - resize better on mobile
 
 function main() {
+  // expose module-scoped functions/objects to global scope for inline handlers
+  window.settings = settings;
+  window.layout = layout;
+  window.popout = popout;
   $(window).load(function () {
     layout.sizeMap($("input[name='mapAlign']:checked").val()); //arranges the maps to best fit on screen
     map.populate(); //adds dungeons and chest icons to the maps
